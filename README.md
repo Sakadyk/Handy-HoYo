@@ -1,4 +1,4 @@
-# Handy-HoYo
+# Handy HoYo
 An app to make your HoYo slave life a lot easier.
 ## Features
 - Daily login for Genshin Impact, Honkai: Star Rail, and Honkai Impact 3rd.
