@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class RedemptionCode extends AppCompatActivity {
-    Button gi, hsr, hi3, daily;
+    Button gi, hsr, hi3, daily, uid;
     EditText code;
 
     @Override
@@ -28,6 +28,7 @@ public class RedemptionCode extends AppCompatActivity {
         hsr = findViewById(R.id.hsr);
         hi3 = findViewById(R.id.hi3);
         daily = findViewById(R.id.daily_login);
+        uid = findViewById(R.id.uid);
         code = findViewById(R.id.code);
 
         gi.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,15 @@ public class RedemptionCode extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent redeem_code = new Intent (RedemptionCode.this, DailyLogin.class);
+                startActivity(redeem_code);
+                finish();
+            }
+        });
+
+        uid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent redeem_code = new Intent (RedemptionCode.this, UID.class);
                 startActivity(redeem_code);
                 finish();
             }

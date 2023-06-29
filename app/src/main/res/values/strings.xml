@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Handy HoYo</string>
+    <string name="enter_code_here">Enter code here</string>
+    <string name="honkai_impact_3rd">Honkai\nImpact 3</string>
+    <string name="honkai_star_rail">Honkai:\nStar Rail</string>
+    <string name="genshin_impact">Genshin Impact</string>
+    <string name="redemption_code">Redeem\nCode</string>
+    <string name="daily_login">Daily\nLogin</string>
+    <string name="paimon_derp">Paimon Derp</string>
+    <string name="user_id">User\nID</string>
+    <string name="copy">Copy</string>
 </resources>
