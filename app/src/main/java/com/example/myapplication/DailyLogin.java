@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class DailyLogin extends AppCompatActivity {
-    Button gi, hsr, hi3, redeem;
+    Button gi, hsr, hi3, redeem, uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class DailyLogin extends AppCompatActivity {
         hsr = findViewById(R.id.hsr);
         hi3 = findViewById(R.id.hi3);
         redeem = findViewById(R.id.redemption_code);
+        uid = findViewById(R.id.uid);
 
         gi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +55,15 @@ public class DailyLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent redeem_code = new Intent (DailyLogin.this, RedemptionCode.class);
+                startActivity(redeem_code);
+                finish();
+            }
+        });
+
+        uid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent redeem_code = new Intent (DailyLogin.this, UID.class);
                 startActivity(redeem_code);
                 finish();
             }
