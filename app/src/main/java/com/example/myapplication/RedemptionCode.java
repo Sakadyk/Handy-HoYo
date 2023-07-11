@@ -35,8 +35,9 @@ public class RedemptionCode extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String url = "https://genshin.hoyoverse.com/en/gift?code=" + code.getText().toString();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
+                Intent intent = new Intent(view.getContext(), Browser.class);
+                intent.putExtra("url", url);
+                view.getContext().startActivity(intent);
             }
         });
 
@@ -54,8 +55,9 @@ public class RedemptionCode extends AppCompatActivity {
                 }
 
                 String url = "https://hsr.hoyoverse.com/gift";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
+                Intent intent = new Intent(view.getContext(), Browser.class);
+                intent.putExtra("url", url);
+                view.getContext().startActivity(intent);
             }
         });
 
