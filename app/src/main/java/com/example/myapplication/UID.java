@@ -15,11 +15,13 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class UID extends AppCompatActivity {
-    Button gi, hsr, hi3, daily, redeem;
+    Button daily, redeem;
     EditText uid_gi, uid_hsr, uid_hi3;
+    ImageView copy_gi, copy_hsr, copy_hi3, clear_gi, clear_hsr, clear_hi3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +29,12 @@ public class UID extends AppCompatActivity {
         setContentView(R.layout.activity_uid);
         getWindow().setStatusBarColor(ContextCompat.getColor(UID.this, R.color.genshin));
 
-        gi = findViewById(R.id.gi);
-        hsr = findViewById(R.id.hsr);
-        hi3 = findViewById(R.id.hi3);
+        copy_gi = findViewById(R.id.copy_uid_gi);
+        copy_hsr = findViewById(R.id.copy_uid_hsr);
+        copy_hi3 = findViewById(R.id.copy_uid_hi3);
+        clear_gi = findViewById(R.id.clear_uid_gi);
+        clear_hsr = findViewById(R.id.clear_uid_hsr);
+        clear_hi3 = findViewById(R.id.clear_uid_hi3);
         daily = findViewById(R.id.daily_login);
         redeem = findViewById(R.id.redemption_code);
         uid_gi = findViewById(R.id.uid_gi);
@@ -110,7 +115,7 @@ public class UID extends AppCompatActivity {
             }
         });
 
-        gi.setOnClickListener(new View.OnClickListener() {
+        copy_gi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the text from uid_gi EditText
@@ -131,8 +136,15 @@ public class UID extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
             }
         });
+        clear_gi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Clear the text of uid_gi EditText
+                uid_gi.setText("");
+            }
+        });
 
-        hsr.setOnClickListener(new View.OnClickListener() {
+        copy_hsr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the text from uid_hsr EditText
@@ -153,8 +165,15 @@ public class UID extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
             }
         });
+        clear_hsr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Clear the text of uid_gi EditText
+                uid_hsr.setText("");
+            }
+        });
 
-        hi3.setOnClickListener(new View.OnClickListener() {
+        copy_hi3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the text from uid_hi3 EditText
@@ -173,6 +192,13 @@ public class UID extends AppCompatActivity {
 
                 // Display a Toast message
                 Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+        clear_hi3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Clear the text of uid_gi EditText
+                uid_hi3.setText("");
             }
         });
 

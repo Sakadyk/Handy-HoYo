@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -10,8 +11,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class DailyLogin extends AppCompatActivity {
-    Button gi, hsr, hi3, redeem, uid;
-
+    Button redeem, uid;
+    CardView gi, hsr, hi3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

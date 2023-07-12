@@ -9,4 +9,5 @@
     <string name="paimon_derp">Paimon Derp</string>
     <string name="user_id">User\nID</string>
     <string name="copy">Copy</string>
+    <string name="type_uid">Type UID</string>
 </resources>

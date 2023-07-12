@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.content.ClipData;
@@ -15,7 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class RedemptionCode extends AppCompatActivity {
-    Button gi, hsr, hi3, daily, uid;
+    Button  daily, uid;
+    CardView gi, hsr, hi3;
     EditText code;
 
     @Override
