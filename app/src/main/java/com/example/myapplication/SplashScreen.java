@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -74,7 +73,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public void run() {
-        Intent intent = new Intent(SplashScreen.this, DailyLogin.class);
+        Intent intent = new Intent(SplashScreen.this, Genshin.class);
         startActivity(intent);
         finish();
     }

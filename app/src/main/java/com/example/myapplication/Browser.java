@@ -28,7 +28,7 @@ public class Browser extends AppCompatActivity {
     ImageView clearUrl;
     WebView webView;
     ProgressBar progressBar;
-    ImageView webBack,webForward,webRefresh,webShare;
+    ImageView webBack,webForward,webRefresh,webShare,back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class Browser extends AppCompatActivity {
         clearUrl = findViewById(R.id.clear_icon);
         progressBar = findViewById(R.id.progress_bar);
         webView = findViewById(R.id.web_view);
+        back = findViewById(R.id.power_off);
 
         webBack = findViewById(R.id.web_back);
         webForward = findViewById(R.id.web_forward);
@@ -124,6 +125,27 @@ public class Browser extends AppCompatActivity {
                 intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
                 intent.setType("text/plain");
                 startActivity(intent);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the class name of the previous activity
+                String previousActivityClassName = getIntent().getStringExtra("previousActivity");
+
+                if (previousActivityClassName != null) {
+                    try {
+                        // Create an Intent for the previous activity using its class name
+                        Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                        Intent intent = new Intent(Browser.this, previousActivityClass);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }

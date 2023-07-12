@@ -8,42 +8,45 @@
     tools:context=".Browser">
 
     <RelativeLayout
+        android:id="@+id/input_fields"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_corner"
-        android:id="@+id/input_fields">
+        android:padding="8dp">
 
         <ImageView
+            android:id="@+id/power_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_link_24"
-            android:id="@+id/link_icon"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_power_settings_new_24" />
 
         <EditText
+            android:id="@+id/url_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="16dp"
             android:layout_toStartOf="@id/clear_icon"
-            android:layout_toEndOf="@id/link_icon"
+            android:layout_toEndOf="@id/power_off"
             android:background="@null"
             android:hint="Search or Type URL"
-            android:textSize="14sp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/url_input"
-            android:inputType="textUri"
             android:imeOptions="actionGo"
-            android:singleLine="true" />
+            android:inputType="textUri"
+            android:singleLine="true"
+            android:textSize="14sp" />
 
         <ImageView
+            android:id="@+id/clear_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/baseline_cancel_24"
-            android:id="@+id/clear_icon"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_cancel_24" />
 
     </RelativeLayout>
 

@@ -17,16 +17,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Honkai3rd"
+            android:exported="false" />
+        <activity
+            android:name=".HonkaiStarRail"
+            android:exported="false" />
+        <activity
             android:name=".Browser"
             android:exported="false" />
         <activity
             android:name=".UID"
             android:exported="false" />
         <activity
-            android:name=".RedemptionCode"
-            android:exported="false" />
-        <activity
-            android:name=".DailyLogin"
+            android:name=".Genshin"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"

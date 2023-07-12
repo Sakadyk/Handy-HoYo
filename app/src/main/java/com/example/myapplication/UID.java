@@ -8,7 +8,6 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,9 +18,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class UID extends AppCompatActivity {
-    Button daily, redeem;
     EditText uid_gi, uid_hsr, uid_hi3;
-    ImageView copy_gi, copy_hsr, copy_hi3, clear_gi, clear_hsr, clear_hi3;
+    ImageView copy_gi, copy_hsr, copy_hi3, clear_gi, clear_hsr, clear_hi3, back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +33,10 @@ public class UID extends AppCompatActivity {
         clear_gi = findViewById(R.id.clear_uid_gi);
         clear_hsr = findViewById(R.id.clear_uid_hsr);
         clear_hi3 = findViewById(R.id.clear_uid_hi3);
-        daily = findViewById(R.id.daily_login);
-        redeem = findViewById(R.id.redemption_code);
         uid_gi = findViewById(R.id.uid_gi);
         uid_hsr = findViewById(R.id.uid_hsr);
         uid_hi3 = findViewById(R.id.uid_hi3);
+        back = findViewById(R.id.web_back);
 
         // Retrieve the saved values from SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
@@ -202,22 +199,46 @@ public class UID extends AppCompatActivity {
             }
         });
 
-        daily.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent redeem_code = new Intent (UID.this, DailyLogin.class);
-                startActivity(redeem_code);
-                finish();
-            }
-        });
+                // Get the class name of the previous activity
+                String previousActivityClassName = getIntent().getStringExtra("previousActivity");
 
-        redeem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent redeem_code = new Intent (UID.this, RedemptionCode.class);
-                startActivity(redeem_code);
-                finish();
+                if (previousActivityClassName != null) {
+                    try {
+                        // Create an Intent for the previous activity using its class name
+                        Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                        Intent intent = new Intent(UID.this, previousActivityClass);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Get the class name of the previous activity
+        String previousActivityClassName = getIntent().getStringExtra("previousActivity");
+
+        if (previousActivityClassName != null) {
+            try {
+                // Create an Intent for the previous activity using its class name
+                Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                Intent intent = new Intent(UID.this, previousActivityClass);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            super.onBackPressed(); // If no previous activity specified, perform default back button behavior
+        }
     }
 }

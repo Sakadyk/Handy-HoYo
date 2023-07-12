@@ -7,7 +7,7 @@
     <string name="redemption_code">Redeem\nCode</string>
     <string name="daily_login">Daily\nLogin</string>
     <string name="paimon_derp">Paimon Derp</string>
-    <string name="user_id">User\nID</string>
+    <string name="user_id">User ID</string>
     <string name="copy">Copy</string>
     <string name="type_uid">Type UID</string>
 </resources>
