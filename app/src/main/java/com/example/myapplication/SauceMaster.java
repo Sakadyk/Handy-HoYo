@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class SauceMaster extends AppCompatActivity {
     EditText code;
     RelativeLayout button;
+    ImageView clear_code;
     MediaPlayer mediaPlayer;
     AudioManager audioManager;
     AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
@@ -28,6 +30,7 @@ public class SauceMaster extends AppCompatActivity {
 
         button = findViewById(R.id.button);
         code = findViewById(R.id.code_input);
+        clear_code = findViewById(R.id.clear_icon);
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
 
         // Initialize MediaPlayer and set looping
@@ -64,6 +67,14 @@ public class SauceMaster extends AppCompatActivity {
                 intent.putExtra("previousActivity", Genshin.class.getName());
                 view.getContext().startActivity(intent);
                 releaseMediaPlayer();
+            }
+        });
+
+        clear_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Clear the text of uid_gi EditText
+                code.setText("");
             }
         });
     }
