@@ -75,6 +75,7 @@ public class SplashScreen extends AppCompatActivity {
     public void run() {
         Intent intent = new Intent(SplashScreen.this, Genshin.class);
         startActivity(intent);
+        overridePendingTransition(0, 0);
         finish();
     }
 }

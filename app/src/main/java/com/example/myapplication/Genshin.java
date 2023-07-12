@@ -114,7 +114,7 @@ public class Genshin extends AppCompatActivity {
                 Intent intent = new Intent (Genshin.this, UID.class);
                 intent.putExtra("previousActivity", Genshin.class.getName());
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                //overridePendingTransition(0, 0);
                 finish();
             }
         });

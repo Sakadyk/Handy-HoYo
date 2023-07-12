@@ -99,7 +99,7 @@ public class Honkai3rd extends AppCompatActivity {
                 Intent intent = new Intent (Honkai3rd.this, UID.class);
                 intent.putExtra("previousActivity", Honkai3rd.class.getName());
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                //overridePendingTransition(0, 0);
                 finish();
             }
         });

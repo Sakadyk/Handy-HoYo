@@ -113,7 +113,7 @@ public class HonkaiStarRail extends AppCompatActivity {
                 Intent intent = new Intent (HonkaiStarRail.this, UID.class);
                 intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
                 startActivity(intent);
-                overridePendingTransition(0, 0);
+                //overridePendingTransition(0, 0);
                 finish();
             }
         });
