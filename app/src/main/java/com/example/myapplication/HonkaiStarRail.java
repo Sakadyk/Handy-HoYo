@@ -20,6 +20,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class HonkaiStarRail extends AppCompatActivity {
     LinearLayout checkIn, redeemCode, userId, battle, map, wiki;
@@ -177,7 +178,7 @@ public class HonkaiStarRail extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            finish();
+                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
                         }
                         if (handler != null && runnable != null) {
                             handler.removeCallbacks(runnable);
@@ -280,15 +281,6 @@ public class HonkaiStarRail extends AppCompatActivity {
             webView.loadUrl(url);
         }else{
             webView.loadUrl("google.com/search?q="+url);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(webView.canGoBack()){
-            webView.goBack();
-        }else{
-            super.onBackPressed();
         }
     }
 

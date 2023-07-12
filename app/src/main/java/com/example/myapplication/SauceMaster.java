@@ -4,16 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 public class SauceMaster extends AppCompatActivity {
-
     EditText code;
     RelativeLayout button;
+    MediaPlayer mediaPlayer;
+    AudioManager audioManager;
+    AudioManager.OnAudioFocusChangeListener audioFocusChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +28,74 @@ public class SauceMaster extends AppCompatActivity {
 
         button = findViewById(R.id.button);
         code = findViewById(R.id.code_input);
+        audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+
+        // Initialize MediaPlayer and set looping
+        mediaPlayer = MediaPlayer.create(this, R.raw.saxsolo);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
+
+        audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+            @Override
+            public void onAudioFocusChange(int focusChange) {
+                switch (focusChange) {
+                    case AudioManager.AUDIOFOCUS_LOSS:
+                        // Stop playback and release MediaPlayer resources
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                        break;
+                }
+            }
+        };
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://nhentai.net/g/" + code.getText().toString();
+                String codeInput = code.getText().toString();
+                String url;
+                if (TextUtils.isEmpty(codeInput)) {
+                    url = "https://nhentai.net/";
+                } else {
+                    url = "https://nhentai.net/g/" + codeInput;
+                }
                 Intent intent = new Intent(view.getContext(), Browser.class);
                 intent.putExtra("url", url);
-                intent.putExtra("previousActivity", SauceMaster.class.getName());
+                intent.putExtra("previousActivity", Genshin.class.getName());
                 view.getContext().startActivity(intent);
+                releaseMediaPlayer();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        releaseMediaPlayer();
+    }
+
+    private void releaseMediaPlayer() {
+        // Release the MediaPlayer resources
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     public void onBackPressed() {

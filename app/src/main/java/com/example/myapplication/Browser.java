@@ -164,7 +164,22 @@ public class Browser extends AppCompatActivity {
         if(webView.canGoBack()){
             webView.goBack();
         }else{
-            super.onBackPressed();
+            // Get the class name of the previous activity
+            String previousActivityClassName = getIntent().getStringExtra("previousActivity");
+
+            if (previousActivityClassName != null) {
+                try {
+                    // Create an Intent for the previous activity using its class name
+                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                    Intent intent = new Intent(Browser.this, previousActivityClass);
+                    startActivity(intent);
+                    finish();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                super.onBackPressed(); // If no previous activity specified, perform default back button behavior
+            }
         }
     }
 

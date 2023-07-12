@@ -211,7 +211,6 @@ public class UID extends AppCompatActivity {
                         Class<?> previousActivityClass = Class.forName(previousActivityClassName);
                         Intent intent = new Intent(UID.this, previousActivityClass);
                         startActivity(intent);
-                        overridePendingTransition(0, 0);
                         finish();
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
@@ -232,7 +231,6 @@ public class UID extends AppCompatActivity {
                 Class<?> previousActivityClass = Class.forName(previousActivityClassName);
                 Intent intent = new Intent(UID.this, previousActivityClass);
                 startActivity(intent);
-                overridePendingTransition(0, 0);
                 finish();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

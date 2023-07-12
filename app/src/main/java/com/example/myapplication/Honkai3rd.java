@@ -20,6 +20,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class Honkai3rd extends AppCompatActivity {
     LinearLayout checkIn, userId, battle;
@@ -114,7 +115,7 @@ public class Honkai3rd extends AppCompatActivity {
             }
         });
 
-        app_hsr.setOnTouchListener(new View.OnTouchListener() {
+        app_hi3.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -141,7 +142,7 @@ public class Honkai3rd extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            finish();
+                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
                         }
                         if (handler != null && runnable != null) {
                             handler.removeCallbacks(runnable);
@@ -180,7 +181,7 @@ public class Honkai3rd extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Honkai3rd.this, HonkaiStarRail.class);
+                            Intent intent = new Intent(Honkai3rd.this, Genshin.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             finish();
@@ -245,15 +246,6 @@ public class Honkai3rd extends AppCompatActivity {
             webView.loadUrl(url);
         }else{
             webView.loadUrl("google.com/search?q="+url);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(webView.canGoBack()){
-            webView.goBack();
-        }else{
-            super.onBackPressed();
         }
     }
 
