@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class SplashScreen extends AppCompatActivity {
@@ -58,7 +58,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public void moveGif() {
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) gifImageView.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) gifImageView.getLayoutParams();
         float progressBarWidth = progressBar.getWidth();
         float progress = progressBar.getProgress();
         float maxProgress = progressBar.getMax();
