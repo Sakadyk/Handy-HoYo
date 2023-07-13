@@ -250,22 +250,46 @@
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/empty_3"
+            android:id="@+id/kqm_hsr"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/wiki_hsr"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/kqmhsr"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="KQM - HSR: Guide and TC"
+                android:textSize="11sp"
+                android:textAlignment="center"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/empty_4"
+            android:id="@+id/enka_hsr"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/empty_3"
+            android:layout_toEndOf="@id/kqm_hsr"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/enka"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enka.Network for HSR"
+                android:textSize="11sp"
+                android:textAlignment="center"/>
 
         </LinearLayout>
 

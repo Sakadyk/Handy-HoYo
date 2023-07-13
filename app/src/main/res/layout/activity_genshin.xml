@@ -272,11 +272,23 @@
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/empty_4"
+            android:id="@+id/enka_gi"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/keqing_mains"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/enka"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enka.Network"
+                android:textSize="11sp"
+                android:textAlignment="center"/>
 
         </LinearLayout>
 

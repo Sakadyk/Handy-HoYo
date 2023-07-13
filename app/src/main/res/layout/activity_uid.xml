@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="30dp"
+    android:gravity="center_horizontal"
+    android:paddingHorizontal="30dp"
     tools:context=".UID">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="333dp"
+        android:layout_height="250dp"
         android:src="@drawable/derpaimon"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:contentDescription="@string/paimon_derp" />
 
     <RelativeLayout
@@ -38,7 +38,7 @@
         </androidx.cardview.widget.CardView>
 
         <EditText
-            android:id="@+id/uid_gi"
+            android:id="@+id/uid_gi_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginVertical="5dp"
@@ -99,7 +99,7 @@
         </androidx.cardview.widget.CardView>
 
         <EditText
-            android:id="@+id/uid_hsr"
+            android:id="@+id/uid_hsr_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginVertical="5dp"
@@ -160,7 +160,7 @@
         </androidx.cardview.widget.CardView>
 
         <EditText
-            android:id="@+id/uid_hi3"
+            android:id="@+id/uid_hi3_text"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginVertical="5dp"
@@ -200,19 +200,34 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/back"
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/hi3_fields">
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/hi3_fields"
+        android:background="@drawable/rounded_corner3"
+        android:gravity="center"
+        android:padding="8dp">
 
         <ImageView
+            android:id="@+id/power_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_24"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="10dp"
-            android:id="@+id/web_back" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_arrow_back2_24" />
+
+        <TextView
+            android:id="@+id/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="2dp"
+            android:layout_toEndOf="@id/power_off"
+            android:background="@null"
+            android:text="Return"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

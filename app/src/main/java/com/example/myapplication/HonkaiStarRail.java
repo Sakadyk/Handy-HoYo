@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class HonkaiStarRail extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki;
-    CardView app_gi, app_hsr, app_hi3;
+    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
+    CardView appGi, appHsr, appHi3;
     WebView webView;
     ImageView webBack, webRefresh;
     @SuppressLint("ClickableViewAccessibility")
@@ -38,9 +38,9 @@ public class HonkaiStarRail extends AppCompatActivity {
         webBack = findViewById(R.id.web_back);
         webRefresh = findViewById(R.id.web_refresh);
 
-        app_gi = findViewById(R.id.gi);
-        app_hsr = findViewById(R.id.hsr);
-        app_hi3 = findViewById(R.id.hi3);
+        appGi = findViewById(R.id.gi);
+        appHsr = findViewById(R.id.hsr);
+        appHi3 = findViewById(R.id.hi3);
 
         checkIn = findViewById(R.id.check_in_hsr);
         redeemCode = findViewById(R.id.redeem_code_hsr);
@@ -48,6 +48,8 @@ public class HonkaiStarRail extends AppCompatActivity {
         battle = findViewById(R.id.battle_hsr);
         map = findViewById(R.id.map_hsr);
         wiki = findViewById(R.id.wiki_hsr);
+        kqm = findViewById(R.id.kqm_hsr);
+        enka = findViewById(R.id.enka_hsr);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -151,7 +153,42 @@ public class HonkaiStarRail extends AppCompatActivity {
             }
         });
 
-        app_hsr.setOnTouchListener(new View.OnTouchListener() {
+        kqm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://hsr.keqingmains.com/";
+                Intent intent = new Intent(view.getContext(), Browser.class);
+                intent.putExtra("url", url);
+                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        enka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                String uidHsrText = sharedPreferences.getString("uid_hsr", "");
+
+                String url;
+                if (!uidHsrText.isEmpty()) { url = "https://enka.network/u/" + uidHsrText;
+                } else {
+                    url = "https://enka.network";
+                }
+
+                Intent intent = new Intent(view.getContext(), Browser.class);
+                intent.putExtra("url", url);
+                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
+                view.getContext().startActivity(intent);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("uid_hsr", uidHsrText);
+                editor.apply();*/
+                Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        appHsr.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -190,7 +227,7 @@ public class HonkaiStarRail extends AppCompatActivity {
             }
         });
 
-        app_gi.setOnTouchListener(new View.OnTouchListener() {
+        appGi.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -232,7 +269,7 @@ public class HonkaiStarRail extends AppCompatActivity {
             }
         });
 
-        app_hi3.setOnTouchListener(new View.OnTouchListener() {
+        appHi3.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;

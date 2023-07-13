@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Browser extends AppCompatActivity {
     EditText urlInput;
@@ -140,7 +142,7 @@ public class Browser extends AppCompatActivity {
                         Class<?> previousActivityClass = Class.forName(previousActivityClassName);
                         Intent intent = new Intent(Browser.this, previousActivityClass);
                         startActivity(intent);
-                        overridePendingTransition(0, 0);
+                        webView.clearHistory();
                         finish();
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
@@ -173,6 +175,7 @@ public class Browser extends AppCompatActivity {
                     Class<?> previousActivityClass = Class.forName(previousActivityClassName);
                     Intent intent = new Intent(Browser.this, previousActivityClass);
                     startActivity(intent);
+                    webView.clearHistory();
                     finish();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -181,6 +184,23 @@ public class Browser extends AppCompatActivity {
                 super.onBackPressed(); // If no previous activity specified, perform default back button behavior
             }
         }
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        View view = getCurrentFocus();
+        if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
+            int[] coordinates = new int[2];
+            view.getLocationOnScreen(coordinates);
+            float x = event.getRawX() + view.getLeft() - coordinates[0];
+            float y = event.getRawY() + view.getTop() - coordinates[1];
+
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                view.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     class MyWebViewClient extends WebViewClient{

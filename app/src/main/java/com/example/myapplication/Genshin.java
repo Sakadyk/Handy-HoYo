@@ -5,7 +5,9 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,13 +20,14 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Genshin extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm;
-    CardView app_gi, app_hsr, app_hi3;
+    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
+    CardView appGi, appHsr, appHi3;
     WebView webView;
     ImageView webBack, webRefresh;
     @SuppressLint("ClickableViewAccessibility")
@@ -38,9 +41,9 @@ public class Genshin extends AppCompatActivity {
         webBack = findViewById(R.id.web_back);
         webRefresh = findViewById(R.id.web_refresh);
 
-        app_gi = findViewById(R.id.gi);
-        app_hsr = findViewById(R.id.hsr);
-        app_hi3 = findViewById(R.id.hi3);
+        appGi = findViewById(R.id.gi);
+        appHsr = findViewById(R.id.hsr);
+        appHi3 = findViewById(R.id.hi3);
 
         checkIn = findViewById(R.id.check_in_gi);
         redeemCode = findViewById(R.id.redeem_code_gi);
@@ -49,6 +52,7 @@ public class Genshin extends AppCompatActivity {
         map = findViewById(R.id.map_gi);
         wiki = findViewById(R.id.wiki_gi);
         kqm = findViewById(R.id.keqing_mains);
+        enka = findViewById(R.id.enka_gi);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -163,7 +167,30 @@ public class Genshin extends AppCompatActivity {
             }
         });
 
-        app_gi.setOnTouchListener(new View.OnTouchListener() {
+        enka.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                String uidGiText = sharedPreferences.getString("uid_gi", "");
+
+                String url;
+                if (!uidGiText.isEmpty()) { url = "https://enka.network/u/" + uidGiText;
+                } else {
+                    url = "https://enka.network";
+                }
+
+                Intent intent = new Intent(view.getContext(), Browser.class);
+                intent.putExtra("url", url);
+                intent.putExtra("previousActivity", Genshin.class.getName());
+                view.getContext().startActivity(intent);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("uid_gi", uidGiText);
+                editor.apply();
+            }
+        });
+
+        appGi.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -202,7 +229,7 @@ public class Genshin extends AppCompatActivity {
             }
         });
 
-        app_hsr.setOnTouchListener(new View.OnTouchListener() {
+        appHsr.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -244,7 +271,7 @@ public class Genshin extends AppCompatActivity {
             }
         });
 
-        app_hi3.setOnTouchListener(new View.OnTouchListener() {
+        appHi3.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;

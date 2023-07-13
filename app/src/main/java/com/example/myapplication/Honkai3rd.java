@@ -23,8 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Honkai3rd extends AppCompatActivity {
-    LinearLayout checkIn, userId, battle;
-    CardView app_gi, app_hsr, app_hi3;
+    LinearLayout checkIn, userId, battle, wiki;
+    CardView appGi, appHsr, appHi3;
     WebView webView;
     ImageView webBack, webRefresh;
     @SuppressLint("ClickableViewAccessibility")
@@ -38,13 +38,14 @@ public class Honkai3rd extends AppCompatActivity {
         webBack = findViewById(R.id.web_back);
         webRefresh = findViewById(R.id.web_refresh);
 
-        app_gi = findViewById(R.id.gi);
-        app_hsr = findViewById(R.id.hsr);
-        app_hi3 = findViewById(R.id.hi3);
+        appGi = findViewById(R.id.gi);
+        appHsr = findViewById(R.id.hsr);
+        appHi3 = findViewById(R.id.hi3);
 
         checkIn = findViewById(R.id.check_in_hi3);
         userId = findViewById(R.id.uid_hi3);
         battle = findViewById(R.id.battle_hi3);
+        wiki = findViewById(R.id.wiki_hi3);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -115,7 +116,18 @@ public class Honkai3rd extends AppCompatActivity {
             }
         });
 
-        app_hi3.setOnTouchListener(new View.OnTouchListener() {
+        wiki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://honkaiimpact3.fandom.com/";
+                Intent intent = new Intent(view.getContext(), Browser.class);
+                intent.putExtra("url", url);
+                intent.putExtra("previousActivity", Honkai3rd.class.getName());
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        appHi3.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -154,7 +166,7 @@ public class Honkai3rd extends AppCompatActivity {
             }
         });
 
-        app_gi.setOnTouchListener(new View.OnTouchListener() {
+        appGi.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
@@ -196,7 +208,7 @@ public class Honkai3rd extends AppCompatActivity {
             }
         });
 
-        app_hsr.setOnTouchListener(new View.OnTouchListener() {
+        appHsr.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
             private boolean isLongClick = false;
