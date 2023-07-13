@@ -26,8 +26,7 @@
             android:id="@+id/progresstext"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="end"
+            android:textAlignment="textEnd"
             android:textColor="@color/genshin"
             android:textSize="30sp"
             android:textStyle="bold"/>
