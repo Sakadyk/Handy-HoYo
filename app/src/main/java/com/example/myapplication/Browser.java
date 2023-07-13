@@ -99,6 +99,8 @@ public class Browser extends AppCompatActivity {
             public void onClick(View view) {
                 if(webView.canGoBack()){
                     webView.goBack();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Can no longer go back", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,11 +124,10 @@ public class Browser extends AppCompatActivity {
         webShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+                Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                startActivity(intent);
+                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+                startActivity(Intent.createChooser(intent, "Share URL"));
             }
         });
 
