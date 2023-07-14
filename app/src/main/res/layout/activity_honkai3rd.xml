@@ -39,6 +39,15 @@
             android:padding="10dp"
             android:id="@+id/web_refresh" />
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_arrow_forward_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_forward" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -48,13 +57,13 @@
         android:gravity="center"
         android:paddingVertical="5dp"
         android:background="@color/genshin"
-        android:layout_above="@id/genshin_app_1">
+        android:layout_above="@id/app_1">
 
         <androidx.cardview.widget.CardView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/gi"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="11dp"
             android:layout_centerVertical="true">
             <ImageView
                 android:layout_width="match_parent"
@@ -66,7 +75,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/hsr"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="11dp"
             android:layout_marginStart="15dp"
             android:layout_toEndOf="@id/gi"
             android:layout_centerVertical="true">
@@ -81,25 +90,50 @@
             android:layout_height="50dp"
             android:id="@+id/hi3"
             app:cardCornerRadius="50dp"
+            app:cardElevation="0dp"
             android:layout_marginStart="15dp"
             android:layout_toEndOf="@id/hsr"
+            app:cardBackgroundColor="@color/genshin4"
+            android:layout_centerVertical="true">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="50dp"
+                android:layout_margin="3dp"
+                android:layout_gravity="center"
+                app:cardBackgroundColor="@color/genshin4"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/derpy"/>
+            </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/zzz"
+            app:cardCornerRadius="11dp"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/hi3"
             android:layout_centerVertical="true">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/derpy"/>
+                android:src="@drawable/zzz48"/>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/genshin_app_1"
+        android:id="@+id/app_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:paddingHorizontal="10dp"
         android:gravity="center_horizontal"
-        android:layout_above="@id/genshin_app_2">
+        android:layout_above="@id/app_2">
 
         <LinearLayout
             android:layout_width="75dp"
@@ -194,7 +228,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/genshin_app_2"
+        android:id="@+id/app_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"

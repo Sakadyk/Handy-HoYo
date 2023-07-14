@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HonkaiStarRail">
-
+    tools:context=".ZenlessZoneZero">
 
     <WebView
         android:id="@+id/web_view"
@@ -76,25 +75,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/hsr"
-            app:cardCornerRadius="50dp"
-            app:cardElevation="0dp"
+            app:cardCornerRadius="11dp"
             android:layout_marginStart="15dp"
             android:layout_toEndOf="@id/gi"
-            app:cardBackgroundColor="@color/genshin4"
             android:layout_centerVertical="true">
-            <androidx.cardview.widget.CardView
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="50dp"
-                android:layout_margin="3dp"
-                android:layout_gravity="center"
-                app:cardBackgroundColor="@color/genshin4"
-                android:layout_centerVertical="true">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/derpy"/>
-            </androidx.cardview.widget.CardView>
+                android:src="@drawable/hsr48"/>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -115,14 +103,25 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/zzz"
-            app:cardCornerRadius="11dp"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="0dp"
             android:layout_marginStart="15dp"
             android:layout_toEndOf="@id/hi3"
+            app:cardBackgroundColor="@color/genshin4"
             android:layout_centerVertical="true">
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/zzz48"/>
+                app:cardCornerRadius="50dp"
+                android:layout_margin="3dp"
+                android:layout_gravity="center"
+                app:cardBackgroundColor="@color/genshin4"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/derpy"/>
+            </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
@@ -139,19 +138,19 @@
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/check_in_hsr"
+            android:id="@+id/signup_zzz"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/checkhsr"/>
+                android:src="@drawable/signupzzz"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Check In"
+                android:text="Sign-Up"
                 android:textSize="11sp"
                 android:textAlignment="center"/>
 
@@ -160,69 +159,33 @@
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/redeem_code_hsr"
+            android:id="@+id/uid_hi3"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/check_in_hsr"
+            android:layout_toEndOf="@id/signup_zzz"
             android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/redeemhsr"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Redemption Code"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/uid_hsr"
+            android:id="@+id/battle_hi3"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/redeem_code_hsr"
+            android:layout_toEndOf="@id/uid_hi3"
             android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/uidhsr"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_id"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/battle_hsr"
+            android:id="@+id/wiki_hi3"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/uid_hsr"
+            android:layout_toEndOf="@id/battle_hi3"
             android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/battlehsr"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Battle Records"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
 
         </LinearLayout>
 
@@ -244,86 +207,38 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/maphsr"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Honkai: Star Rail Map"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/wiki_hsr"
+            android:id="@+id/wiki_gi"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/map_hsr"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/wikihsr"/>
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Honkai: Star Rail Wiki"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
+        <LinearLayout
+            android:layout_width="75dp"
+            android:layout_height="90dp"
+            android:id="@+id/empty_3"
+            android:gravity="center_horizontal"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/wiki_gi"
+            android:orientation="vertical">
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="75dp"
             android:layout_height="90dp"
-            android:id="@+id/kqm_hsr"
+            android:id="@+id/empty_4"
             android:gravity="center_horizontal"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/wiki_hsr"
+            android:layout_toEndOf="@id/empty_3"
             android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/kqmhsr"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="KQM - HSR: Guide and TC"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/enka_hsr"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/kqm_hsr"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/enka"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Enka.Network for HSR"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
 
         </LinearLayout>
 

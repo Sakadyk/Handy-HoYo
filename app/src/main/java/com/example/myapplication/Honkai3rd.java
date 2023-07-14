@@ -24,9 +24,11 @@ import android.widget.Toast;
 
 public class Honkai3rd extends AppCompatActivity {
     LinearLayout checkIn, userId, battle, wiki;
-    CardView appGi, appHsr, appHi3;
+    CardView appGi, appHsr, appHi3, appZzz;
     WebView webView;
-    ImageView webBack, webRefresh;
+    ImageView webBack, webRefresh, webForward;
+    private int backButtonClickCount = 0;
+    private long backButtonLastClickTime = 0;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,13 @@ public class Honkai3rd extends AppCompatActivity {
 
         webView = findViewById(R.id.web_view);
         webBack = findViewById(R.id.web_back);
+        webForward = findViewById(R.id.web_forward);
         webRefresh = findViewById(R.id.web_refresh);
 
         appGi = findViewById(R.id.gi);
         appHsr = findViewById(R.id.hsr);
         appHi3 = findViewById(R.id.hi3);
+        appZzz = findViewById(R.id.zzz);
 
         checkIn = findViewById(R.id.check_in_hi3);
         userId = findViewById(R.id.uid_hi3);
@@ -70,8 +74,45 @@ public class Honkai3rd extends AppCompatActivity {
         webBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(webView.canGoBack()){
+                if (webView.canGoBack()) {
                     webView.goBack();
+                } else {
+                    long currentTime = System.currentTimeMillis();
+                    long elapsedTime = currentTime - backButtonLastClickTime;
+                    if (elapsedTime < 1000) { // Check if the button is pressed within 1 second
+                        backButtonClickCount++;
+                    } else {
+                        backButtonClickCount = 1;
+                    }
+                    backButtonLastClickTime = currentTime;
+                    if (backButtonClickCount >= 3) { // Check if the button is pressed 3 or more times consecutively
+                        Toast.makeText(getApplicationContext(), "CAN NO LONGER GO BACK", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Can no longer go back", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+        webForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (webView.canGoForward()) {
+                    webView.goForward();
+                } else {
+                    long currentTime = System.currentTimeMillis();
+                    long elapsedTime = currentTime - backButtonLastClickTime;
+                    if (elapsedTime < 1000) { // Check if the button is pressed within 1 second
+                        backButtonClickCount++;
+                    } else {
+                        backButtonClickCount = 1;
+                    }
+                    backButtonLastClickTime = currentTime;
+                    if (backButtonClickCount >= 3) { // Check if the button is pressed 3 or more times consecutively
+                        Toast.makeText(getApplicationContext(), "CAN NO LONGER GO FORWARD", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Can no longer go forward", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -237,6 +278,49 @@ public class Honkai3rd extends AppCompatActivity {
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
                             Intent intent = new Intent(Honkai3rd.this, HonkaiStarRail.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        appZzz.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @SuppressLint("ClickableViewAccessibility")
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(Honkai3rd.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(Honkai3rd.this, ZenlessZoneZero.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             finish();

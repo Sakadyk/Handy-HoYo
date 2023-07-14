@@ -5,9 +5,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,13 +18,12 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class Genshin extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
+public class ZenlessZoneZero extends AppCompatActivity {
+    LinearLayout signUp;
     CardView appGi, appHsr, appHi3, appZzz;
     WebView webView;
     ImageView webBack, webRefresh, webForward;
@@ -36,8 +33,8 @@ public class Genshin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_genshin);
-        getWindow().setStatusBarColor(ContextCompat.getColor(Genshin.this, R.color.genshin));
+        setContentView(R.layout.activity_zenless_zone_zero);
+        getWindow().setStatusBarColor(ContextCompat.getColor(ZenlessZoneZero.this, R.color.genshin));
 
         webView = findViewById(R.id.web_view);
         webBack = findViewById(R.id.web_back);
@@ -49,14 +46,7 @@ public class Genshin extends AppCompatActivity {
         appHi3 = findViewById(R.id.hi3);
         appZzz = findViewById(R.id.zzz);
 
-        checkIn = findViewById(R.id.check_in_gi);
-        redeemCode = findViewById(R.id.redeem_code_gi);
-        userId = findViewById(R.id.uid_gi);
-        battle = findViewById(R.id.battle_gi);
-        map = findViewById(R.id.map_gi);
-        wiki = findViewById(R.id.wiki_gi);
-        kqm = findViewById(R.id.keqing_mains);
-        enka = findViewById(R.id.enka_gi);
+        signUp = findViewById(R.id.signup_zzz);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -76,7 +66,7 @@ public class Genshin extends AppCompatActivity {
                 super.onProgressChanged(view, newProgress);
             }
         });
-        loadMyUrl("https://paimon.moe/timeline");
+        loadMyUrl("https://zenless.hoyoverse.com/en-us/news");
 
         webBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,103 +121,53 @@ public class Genshin extends AppCompatActivity {
             }
         });
 
-        checkIn.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481";
+                String url = "https://zenless.hoyoverse.com/en-us";
                 Intent intent = new Intent(view.getContext(), Browser.class);
                 intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
+                intent.putExtra("previousActivity", ZenlessZoneZero.class.getName());
                 view.getContext().startActivity(intent);
             }
         });
 
-        redeemCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://genshin.hoyoverse.com/en/gift";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                view.getContext().startActivity(intent);
-            }
-        });
+        appZzz.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
 
-        userId.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (Genshin.this, UID.class);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                startActivity(intent);
-                //overridePendingTransition(0, 0);
-                finish();
-            }
-        });
-
-        battle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://act.hoyolab.com/app/community-game-records-sea/m.html";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://act.hoyolab.com/ys/app/interactive-map/index.html";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        wiki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://genshin-impact.fandom.com/";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        kqm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url = "https://keqingmains.com/";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        enka.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                String uidGiText = sharedPreferences.getString("uid_gi", "");
-
-                String url;
-                if (!uidGiText.isEmpty()) { url = "https://enka.network/u/" + uidGiText;
-                } else {
-                    url = "https://enka.network";
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(ZenlessZoneZero.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
                 }
-
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                view.getContext().startActivity(intent);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("uid_gi", uidGiText);
-                editor.apply();
+                return false;
             }
         });
 
@@ -247,7 +187,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(ZenlessZoneZero.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -258,7 +198,10 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ZenlessZoneZero.this, Genshin.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            finish();
                         }
                         if (handler != null && runnable != null) {
                             handler.removeCallbacks(runnable);
@@ -286,7 +229,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(ZenlessZoneZero.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -297,7 +240,7 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, HonkaiStarRail.class);
+                            Intent intent = new Intent(ZenlessZoneZero.this, HonkaiStarRail.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             finish();
@@ -328,7 +271,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(ZenlessZoneZero.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -339,49 +282,7 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, Honkai3rd.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        appZzz.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, ZenlessZoneZero.class);
+                            Intent intent = new Intent(ZenlessZoneZero.this, Honkai3rd.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             finish();

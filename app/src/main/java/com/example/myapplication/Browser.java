@@ -31,6 +31,8 @@ public class Browser extends AppCompatActivity {
     WebView webView;
     ProgressBar progressBar;
     ImageView webBack,webForward,webRefresh,webShare,back;
+    private int backButtonClickCount = 0;
+    private long backButtonLastClickTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +99,22 @@ public class Browser extends AppCompatActivity {
         webBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(webView.canGoBack()){
+                if (webView.canGoBack()) {
                     webView.goBack();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Can no longer go back", Toast.LENGTH_SHORT).show();
+                    long currentTime = System.currentTimeMillis();
+                    long elapsedTime = currentTime - backButtonLastClickTime;
+                    if (elapsedTime < 1000) { // Check if the button is pressed within 1 second
+                        backButtonClickCount++;
+                    } else {
+                        backButtonClickCount = 1;
+                    }
+                    backButtonLastClickTime = currentTime;
+                    if (backButtonClickCount >= 3) { // Check if the button is pressed 3 or more times consecutively
+                        Toast.makeText(getApplicationContext(), "CAN NO LONGER GO BACK", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Can no longer go back", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -108,8 +122,22 @@ public class Browser extends AppCompatActivity {
         webForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(webView.canGoForward()){
+                if (webView.canGoForward()) {
                     webView.goForward();
+                } else {
+                    long currentTime = System.currentTimeMillis();
+                    long elapsedTime = currentTime - backButtonLastClickTime;
+                    if (elapsedTime < 1000) { // Check if the button is pressed within 1 second
+                        backButtonClickCount++;
+                    } else {
+                        backButtonClickCount = 1;
+                    }
+                    backButtonLastClickTime = currentTime;
+                    if (backButtonClickCount >= 3) { // Check if the button is pressed 3 or more times consecutively
+                        Toast.makeText(getApplicationContext(), "CAN NO LONGER GO FORWARD", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Can no longer go forward", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
