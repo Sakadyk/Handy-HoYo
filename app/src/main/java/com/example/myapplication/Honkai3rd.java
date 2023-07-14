@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class Honkai3rd extends AppCompatActivity {
     LinearLayout checkIn, userId, battle, wiki;
     CardView appGi, appHsr, appHi3, appZzz;
@@ -78,9 +80,10 @@ public class Honkai3rd extends AppCompatActivity {
         loadMyUrl("https://honkaiimpact3.hoyoverse.com/global/en-us/news");
 
         webBack.setOnClickListener(new View.OnClickListener() {
+            String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (webView.canGoBack()) {
+                if (!Objects.equals(urlHome, "https://honkaiimpact3.hoyoverse.com/global/en-us/news")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
@@ -133,7 +136,7 @@ public class Honkai3rd extends AppCompatActivity {
         webHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://paimon.moe/timeline");
+                loadMyUrl("https://honkaiimpact3.hoyoverse.com/global/en-us/news");
             }
         });
 
@@ -168,7 +171,7 @@ public class Honkai3rd extends AppCompatActivity {
         battle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html?bbs_presentation_style=fullscreen&bbs_auth_required=true&gid=1&utm_source=hoyolab&utm_medium=tools&bbs_theme=dark&bbs_theme_device=1#/bh3");
+                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html#/bh3");
             }
         });
 

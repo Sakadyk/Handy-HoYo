@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 public class ZenlessZoneZero extends AppCompatActivity {
     LinearLayout signUp;
@@ -76,9 +77,10 @@ public class ZenlessZoneZero extends AppCompatActivity {
         loadMyUrl("https://zenless.hoyoverse.com/en-us/news");
 
         webBack.setOnClickListener(new View.OnClickListener() {
+            String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (webView.canGoBack()) {
+                if (!Objects.equals(urlHome, "https://zenless.hoyoverse.com/en-us/news")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
@@ -131,7 +133,7 @@ public class ZenlessZoneZero extends AppCompatActivity {
         webHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://paimon.moe/timeline");
+                loadMyUrl("https://zenless.hoyoverse.com/en-us/news");
             }
         });
 

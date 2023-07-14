@@ -23,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class HonkaiStarRail extends AppCompatActivity {
     LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
     CardView appGi, appHsr, appHi3, appZzz;
@@ -82,9 +84,10 @@ public class HonkaiStarRail extends AppCompatActivity {
         loadMyUrl("https://pom.moe/timeline");
 
         webBack.setOnClickListener(new View.OnClickListener() {
+            String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (webView.canGoBack()) {
+                if (!Objects.equals(urlHome, "https://pom.moe/timeline")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
@@ -137,7 +140,7 @@ public class HonkaiStarRail extends AppCompatActivity {
         webHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://paimon.moe/timeline");
+                loadMyUrl("https://pom.moe/timeline");
             }
         });
 
@@ -179,7 +182,7 @@ public class HonkaiStarRail extends AppCompatActivity {
         battle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html?bbs_auth_required=true&bbs_presentation_style=fullscreen&gid=6&utm_campaign=battlechronicle&utm_id=6&utm_medium=tools&utm_source=hoyolab&v=101&bbs_theme=dark&bbs_theme_device=1#/hsr");
+                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html#/hsr");
             }
         });
 

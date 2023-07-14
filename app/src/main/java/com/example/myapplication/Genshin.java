@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class Genshin extends AppCompatActivity {
     LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
     CardView appGi, appHsr, appHi3, appZzz;
@@ -84,9 +86,10 @@ public class Genshin extends AppCompatActivity {
         loadMyUrl("https://paimon.moe/timeline");
 
         webBack.setOnClickListener(new View.OnClickListener() {
+            String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (webView.canGoBack()) {
+                if (!Objects.equals(urlHome, "https://paimon.moe/timeline")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
