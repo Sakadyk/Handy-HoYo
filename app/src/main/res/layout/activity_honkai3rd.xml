@@ -6,20 +6,267 @@
     android:layout_height="match_parent"
     tools:context=".Honkai3rd">
 
+    <RelativeLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#183883">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:src="@drawable/hi3banner"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:alpha="0.25"
+            android:id="@+id/banner_img"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_above="@id/app_name">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/gi"
+                app:cardCornerRadius="11dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/gi"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/gi48"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/hsr"
+                app:cardCornerRadius="11dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/gi"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/hsr48"/>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/hi3"
+                app:cardCornerRadius="50dp"
+                android:layout_marginStart="15dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/genshin4"
+                android:layout_centerVertical="true">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="50dp"
+                    android:layout_margin="3dp"
+                    android:layout_gravity="center"
+                    app:cardBackgroundColor="@color/genshin4"
+                    android:layout_centerVertical="true">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/derpy"/>
+                </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/zzz"
+                app:cardCornerRadius="11dp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/hi3"
+                android:layout_centerVertical="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/zzz48"/>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/honkai_impact_3rd"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:paddingBottom="5dp"
+            android:textAlignment="center"
+            android:layout_alignBottom="@id/banner_img"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/genshin"
+        android:layout_below="@id/app_bar"
+        android:id="@+id/divider_1" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/genshin_app"
+        android:layout_below="@id/app_bar">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/check_in_hi3"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/checkhi3"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Check-In"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uid_hi3"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/check_in_hi3"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/uidhi3"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_id"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/battle_hi3"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/uid_hi3"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/battlehi3"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Battle Chronicle"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wiki_hi3"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/battle_hi3"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/battle"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Honkai Impact 3rd Wiki"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </HorizontalScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/genshin"
+        android:layout_below="@id/genshin_app"
+        android:id="@+id/divider_2" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/progress_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progressBackgroundTint="@color/genshin2"
+        android:progressTint="@color/genshin4"
+        android:layout_below="@id/genshin_app"
+        android:visibility="invisible" />
+
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/divider_2"
+        android:layout_above="@id/divider_3"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/genshin"
+        android:id="@+id/divider_3"
         android:layout_above="@id/nav_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_above="@id/app_bar"
         android:id="@+id/nav_layout"
         android:orientation="horizontal"
-        android:background="#2a3946"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
 
         <ImageView
             android:layout_width="24dp"
@@ -33,251 +280,39 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_refresh_24"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:id="@+id/web_refresh" />
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
             android:src="@drawable/baseline_arrow_forward_24"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
             android:id="@+id/web_forward" />
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_home_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_home" />
+
+        <ImageView
+            android:id="@+id/web_refresh"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/baseline_refresh_24" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_share_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_share" />
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingVertical="5dp"
-        android:background="@color/genshin"
-        android:layout_above="@id/app_1">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/gi"
-            app:cardCornerRadius="11dp"
-            android:layout_centerVertical="true">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/gi48"/>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/hsr"
-            app:cardCornerRadius="11dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/gi"
-            android:layout_centerVertical="true">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/hsr48"/>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/hi3"
-            app:cardCornerRadius="50dp"
-            app:cardElevation="0dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/hsr"
-            app:cardBackgroundColor="@color/genshin4"
-            android:layout_centerVertical="true">
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="50dp"
-                android:layout_margin="3dp"
-                android:layout_gravity="center"
-                app:cardBackgroundColor="@color/genshin4"
-                android:layout_centerVertical="true">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/derpy"/>
-            </androidx.cardview.widget.CardView>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/zzz"
-            app:cardCornerRadius="11dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@id/hi3"
-            android:layout_centerVertical="true">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/zzz48"/>
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/app_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingHorizontal="10dp"
-        android:gravity="center_horizontal"
-        android:layout_above="@id/app_2">
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/check_in_hi3"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/checkhi3"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Check-In"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/uid_hi3"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/check_in_hi3"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/uidhi3"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/user_id"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/battle_hi3"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/uid_hi3"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/battlehi3"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Battle Chronicle"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/wiki_hi3"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/battle_hi3"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/wikihi3"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Honkai Impact 3rd Wiki"
-                android:textSize="11sp"
-                android:textAlignment="center"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/app_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true">
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/map_hsr"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/wiki_gi"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/map_hsr"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/empty_3"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/wiki_gi"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="75dp"
-            android:layout_height="90dp"
-            android:id="@+id/empty_4"
-            android:gravity="center_horizontal"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/empty_3"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </RelativeLayout>

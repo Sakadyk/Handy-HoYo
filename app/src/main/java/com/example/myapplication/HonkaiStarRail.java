@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +11,7 @@ import android.os.Handler;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -20,13 +20,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class HonkaiStarRail extends AppCompatActivity {
     LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
     CardView appGi, appHsr, appHi3, appZzz;
     WebView webView;
-    ImageView webBack, webRefresh, webForward;
+    ProgressBar progressBar;
+    ImageView webBack, webRefresh, webForward, webHome, webShare;
     private int backButtonClickCount = 0;
     private long backButtonLastClickTime = 0;
     @SuppressLint("ClickableViewAccessibility")
@@ -34,12 +36,15 @@ public class HonkaiStarRail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_honkai_star_rail);
-        getWindow().setStatusBarColor(ContextCompat.getColor(HonkaiStarRail.this, R.color.genshin));
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        progressBar = findViewById(R.id.progress_bar);
         webView = findViewById(R.id.web_view);
         webBack = findViewById(R.id.web_back);
         webForward = findViewById(R.id.web_forward);
         webRefresh = findViewById(R.id.web_refresh);
+        webHome = findViewById(R.id.web_home);
+        webShare = findViewById(R.id.web_share);
 
         appGi = findViewById(R.id.gi);
         appHsr = findViewById(R.id.hsr);
@@ -71,6 +76,7 @@ public class HonkaiStarRail extends AppCompatActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
+                progressBar.setProgress(newProgress);
             }
         });
         loadMyUrl("https://pom.moe/timeline");
@@ -128,32 +134,41 @@ public class HonkaiStarRail extends AppCompatActivity {
             }
         });
 
+        webHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadMyUrl("https://paimon.moe/timeline");
+            }
+        });
+
+        webShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+                startActivity(Intent.createChooser(intent, "Share URL"));
+            }
+        });
+
         checkIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311");
             }
         });
 
         redeemCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://hsr.hoyoverse.com/gift";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://hsr.hoyoverse.com/gift");
             }
         });
 
         userId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (HonkaiStarRail.this, UID.class);
+                Intent intent = new Intent (HonkaiStarRail.this, UIDGenshin.class);
                 intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
                 startActivity(intent);
                 //overridePendingTransition(0, 0);
@@ -164,44 +179,28 @@ public class HonkaiStarRail extends AppCompatActivity {
         battle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://act.hoyolab.com/app/community-game-records-sea/index.html?bbs_auth_required=true&bbs_presentation_style=fullscreen&gid=6&utm_campaign=battlechronicle&utm_id=6&utm_medium=tools&utm_source=hoyolab&v=101&bbs_theme=dark&bbs_theme_device=1#/hsr";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html?bbs_auth_required=true&bbs_presentation_style=fullscreen&gid=6&utm_campaign=battlechronicle&utm_id=6&utm_medium=tools&utm_source=hoyolab&v=101&bbs_theme=dark&bbs_theme_device=1#/hsr");
             }
         });
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://act.hoyolab.com/sr/app/interactive-map/index.html";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://act.hoyolab.com/sr/app/interactive-map/index.html");
             }
         });
 
         wiki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://honkai-star-rail.fandom.com/";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://honkai-star-rail.fandom.com/");
             }
         });
 
         kqm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://hsr.keqingmains.com/";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://hsr.keqingmains.com/");
             }
         });
 
@@ -216,11 +215,7 @@ public class HonkaiStarRail extends AppCompatActivity {
                 } else {
                     url = "https://enka.network";
                 }
-
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl(url);
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("uid_hsr", uidHsrText);
@@ -298,6 +293,7 @@ public class HonkaiStarRail extends AppCompatActivity {
                             Intent intent = new Intent(HonkaiStarRail.this, Genshin.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         if (handler != null && runnable != null) {
@@ -340,6 +336,7 @@ public class HonkaiStarRail extends AppCompatActivity {
                             @SuppressLint("ClickableViewAccessibility") Intent intent = new Intent(HonkaiStarRail.this, Honkai3rd.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         if (handler != null && runnable != null) {
@@ -382,6 +379,7 @@ public class HonkaiStarRail extends AppCompatActivity {
                             Intent intent = new Intent(HonkaiStarRail.this, ZenlessZoneZero.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         if (handler != null && runnable != null) {
@@ -413,11 +411,13 @@ public class HonkaiStarRail extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override

@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,6 +11,7 @@ import android.os.Handler;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -20,13 +20,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Honkai3rd extends AppCompatActivity {
     LinearLayout checkIn, userId, battle, wiki;
     CardView appGi, appHsr, appHi3, appZzz;
     WebView webView;
-    ImageView webBack, webRefresh, webForward;
+    ProgressBar progressBar;
+    ImageView webBack, webRefresh, webForward, webHome, webShare;
     private int backButtonClickCount = 0;
     private long backButtonLastClickTime = 0;
     @SuppressLint("ClickableViewAccessibility")
@@ -34,12 +36,15 @@ public class Honkai3rd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_honkai3rd);
-        getWindow().setStatusBarColor(ContextCompat.getColor(Honkai3rd.this, R.color.genshin));
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        progressBar = findViewById(R.id.progress_bar);
         webView = findViewById(R.id.web_view);
         webBack = findViewById(R.id.web_back);
         webForward = findViewById(R.id.web_forward);
         webRefresh = findViewById(R.id.web_refresh);
+        webHome = findViewById(R.id.web_home);
+        webShare = findViewById(R.id.web_share);
 
         appGi = findViewById(R.id.gi);
         appHsr = findViewById(R.id.hsr);
@@ -67,6 +72,7 @@ public class Honkai3rd extends AppCompatActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
+                progressBar.setProgress(newProgress);
             }
         });
         loadMyUrl("https://honkaiimpact3.hoyoverse.com/global/en-us/news");
@@ -124,21 +130,34 @@ public class Honkai3rd extends AppCompatActivity {
             }
         });
 
+        webHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadMyUrl("https://paimon.moe/timeline");
+            }
+        });
+
+        webShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+                startActivity(Intent.createChooser(intent, "Share URL"));
+            }
+        });
+
         checkIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Honkai3rd.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://act.hoyolab.com/bbs/event/signin-bh3/index.html?act_id=e202110291205111");
             }
         });
 
         userId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (Honkai3rd.this, UID.class);
+                Intent intent = new Intent (Honkai3rd.this, UIDGenshin.class);
                 intent.putExtra("previousActivity", Honkai3rd.class.getName());
                 startActivity(intent);
                 //overridePendingTransition(0, 0);
@@ -149,22 +168,14 @@ public class Honkai3rd extends AppCompatActivity {
         battle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://act.hoyolab.com/app/community-game-records-sea/index.html?bbs_presentation_style=fullscreen&bbs_auth_required=true&gid=1&utm_source=hoyolab&utm_medium=tools&bbs_theme=dark&bbs_theme_device=1#/bh3";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Honkai3rd.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html?bbs_presentation_style=fullscreen&bbs_auth_required=true&gid=1&utm_source=hoyolab&utm_medium=tools&bbs_theme=dark&bbs_theme_device=1#/bh3");
             }
         });
 
         wiki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://honkaiimpact3.fandom.com/";
-                Intent intent = new Intent(view.getContext(), Browser.class);
-                intent.putExtra("url", url);
-                intent.putExtra("previousActivity", Honkai3rd.class.getName());
-                view.getContext().startActivity(intent);
+                loadMyUrl("https://honkaiimpact3.fandom.com/");
             }
         });
 
@@ -237,6 +248,7 @@ public class Honkai3rd extends AppCompatActivity {
                             Intent intent = new Intent(Honkai3rd.this, Genshin.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         if (handler != null && runnable != null) {
@@ -280,6 +292,7 @@ public class Honkai3rd extends AppCompatActivity {
                             Intent intent = new Intent(Honkai3rd.this, HonkaiStarRail.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         if (handler != null && runnable != null) {
@@ -323,6 +336,7 @@ public class Honkai3rd extends AppCompatActivity {
                             Intent intent = new Intent(Honkai3rd.this, ZenlessZoneZero.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
+                            overridePendingTransition(0, 0);
                             finish();
                         }
                         if (handler != null && runnable != null) {
@@ -354,11 +368,13 @@ public class Honkai3rd extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            progressBar.setVisibility(View.INVISIBLE);
         }
 
         @Override

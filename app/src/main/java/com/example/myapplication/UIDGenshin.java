@@ -14,13 +14,12 @@ import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class UID extends AppCompatActivity {
+public class UIDGenshin extends AppCompatActivity {
     EditText uid_gi, uid_hsr, uid_hi3;
     ImageView copy_gi, copy_hsr, copy_hi3, clear_gi, clear_hsr, clear_hi3;
     RelativeLayout returnToMain;
@@ -29,7 +28,7 @@ public class UID extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uid);
-        getWindow().setStatusBarColor(ContextCompat.getColor(UID.this, R.color.genshin));
+        getWindow().setStatusBarColor(ContextCompat.getColor(UIDGenshin.this, R.color.genshin));
 
         copy_gi = findViewById(R.id.copy_uid_gi);
         copy_hsr = findViewById(R.id.copy_uid_hsr);
@@ -214,7 +213,7 @@ public class UID extends AppCompatActivity {
                     try {
                         // Create an Intent for the previous activity using its class name
                         Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                        Intent intent = new Intent(UID.this, previousActivityClass);
+                        Intent intent = new Intent(UIDGenshin.this, previousActivityClass);
                         startActivity(intent);
                         finish();
                     } catch (ClassNotFoundException e) {
@@ -251,7 +250,7 @@ public class UID extends AppCompatActivity {
             try {
                 // Create an Intent for the previous activity using its class name
                 Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                Intent intent = new Intent(UID.this, previousActivityClass);
+                Intent intent = new Intent(UIDGenshin.this, previousActivityClass);
                 startActivity(intent);
                 finish();
             } catch (ClassNotFoundException e) {
