@@ -141,10 +141,42 @@ public class Genshin extends AppCompatActivity {
             }
         });
 
-        webHome.setOnClickListener(new View.OnClickListener() {
+        webHome.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
             @Override
-            public void onClick(View view) {
-                loadMyUrl("https://paimon.moe/timeline");
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            loadMyUrl("https://paimon.moe/timeline");
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
             }
         });
 
@@ -230,257 +262,65 @@ public class Genshin extends AppCompatActivity {
             }
         });
 
-        appGi.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
+        appGi.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
             }
         });
 
-        appHsr.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
+        appHsr.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, HonkaiStarRail.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            overridePendingTransition(0, 0);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Genshin.this, HonkaiStarRail.class);
+                intent.putExtra("previousActivity", Genshin.class.getName());
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
 
-        appHi3.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
+        appHi3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, Honkai3rd.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            overridePendingTransition(0, 0);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Genshin.this, Honkai3rd.class);
+                intent.putExtra("previousActivity", Genshin.class.getName());
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
 
-        appTot.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
+        appTot.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, TearsOfThemis.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            overridePendingTransition(0, 0);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Genshin.this, TearsOfThemis.class);
+                intent.putExtra("previousActivity", Genshin.class.getName());
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
 
-        appZzz.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
+        appZzz.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, ZenlessZoneZero.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            overridePendingTransition(0, 0);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Genshin.this, ZenlessZoneZero.class);
+                intent.putExtra("previousActivity", Genshin.class.getName());
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
 
-        appHoyo.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
+        appHoyo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, HoYoLAB.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            overridePendingTransition(0, 0);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Genshin.this, HoYoLAB.class);
+                intent.putExtra("previousActivity", Genshin.class.getName());
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+                finish();
             }
         });
     }
