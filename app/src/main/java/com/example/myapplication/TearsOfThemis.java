@@ -4,13 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -77,6 +85,40 @@ public class TearsOfThemis extends AppCompatActivity {
             }
         });
         loadMyUrl("https://tot.hoyoverse.com/m/en-us/information/all");
+
+        webView.setDownloadListener((url, userAgent, contentDisposition, mimeType, contentLength) -> {
+            // Handle the download request here
+            Uri downloadUri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, downloadUri);
+            startActivity(intent);
+        });
+
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                WebView.HitTestResult result = webView.getHitTestResult();
+                if (result.getType() == WebView.HitTestResult.IMAGE_TYPE ||
+                        result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE || result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
+                    // Handle long press on an image or a link
+                    if (result.getType() == WebView.HitTestResult.IMAGE_TYPE || result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+                        // Image long press
+                        String imageUrl = result.getExtra();
+                        Uri imageUri = Uri.parse(imageUrl);
+                        // Show a confirmation dialog or perform image-related actions
+                        showConfirmationDialog(imageUri);
+                    } else if (result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
+                        // Link long press
+                        String linkUrl = result.getExtra();
+                        Uri linkUri = Uri.parse(linkUrl);
+                        // Show a confirmation dialog or perform link-related actions
+                        showConfirmationDialog(linkUri);
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
 
         webBack.setOnClickListener(new View.OnClickListener() {
             String urlHome = webView.getUrl();
@@ -283,5 +325,46 @@ public class TearsOfThemis extends AppCompatActivity {
             super.onReceivedError(view, request, error);
             // Handle the error, e.g., display an error message or try loading an alternative URL.
         }
+    }
+
+    private void showConfirmationDialog(final Uri imageUri) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+
+        dialog.setTitle("Confirmation");
+        dialog.setMessage("Are you sure you want to open this?");
+
+        SpannableString positiveText = new SpannableString("Open");
+        positiveText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, positiveText.length(), 0);
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Open the image in the default phone web browser
+                Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
+                startActivity(intent);
+            }
+        });
+
+        SpannableString negativeText = new SpannableString("Cancel");
+        negativeText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, negativeText.length(), 0);
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // User cancelled, do nothing
+            }
+        });
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                // Get the dialog's window
+                Window window = dialog.getWindow();
+                if (window != null) {
+                    // Set the background drawable with rounded corners
+                    window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
+                }
+            }
+        });
+        dialog.show();
     }
 }

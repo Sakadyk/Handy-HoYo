@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2a3946"
+    android:background="@color/nhcolor"
     tools:context=".Browser">
 
     <RelativeLayout
@@ -24,14 +24,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/baseline_power_settings_new_24" />
+            android:src="@drawable/baseline_power_settings_new2_24" />
 
         <EditText
             android:id="@+id/url_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_toStartOf="@id/clear_icon"
             android:layout_toEndOf="@id/power_off"
             android:background="@null"
@@ -47,14 +47,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/baseline_cancel_24" />
+            android:src="@drawable/baseline_cancel2_24" />
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/genshin"
+        android:background="@color/nhcolor2"
         android:layout_below="@id/input_fields"
         android:id="@+id/divider_1" />
 
@@ -63,8 +63,8 @@
         android:layout_height="2dp"
         android:id="@+id/progress_bar"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:progressBackgroundTint="@color/genshin2"
-        android:progressTint="@color/genshin4"
+        android:progressBackgroundTint="@color/nhcolor"
+        android:progressTint="@color/white"
         android:layout_below="@id/input_fields"
         android:visibility="invisible" />
 
@@ -78,7 +78,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/genshin"
+        android:background="@color/nhcolor2"
         android:id="@+id/divider_2"
         android:layout_above="@id/bottom_layout"/>
 
@@ -88,13 +88,13 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/bottom_layout"
         android:orientation="horizontal"
-        android:background="#2a3946"
+        android:background="@color/nhcolor"
         android:gravity="center">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_arrow_back_24"
+            android:src="@drawable/baseline_arrow_back2_24"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
@@ -102,7 +102,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_arrow_forward_24"
+            android:src="@drawable/baseline_arrow_forward2_24"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
@@ -110,7 +110,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_refresh_24"
+            android:src="@drawable/baseline_refresh2_24"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
@@ -118,7 +118,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="match_parent"
-            android:src="@drawable/baseline_share_24"
+            android:src="@drawable/baseline_share2_24"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
