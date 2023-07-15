@@ -29,7 +29,7 @@
             android:layout_height="34dp"
             android:id="@+id/gi"
             app:cardCornerRadius="8dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:layout_centerVertical="true">
             <ImageView
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_toStartOf="@id/copyclear_uid_gi"
             android:layout_toEndOf="@id/gi"
             android:background="@null"
@@ -50,21 +50,21 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:singleLine="true"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/copyclear_uid_gi">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_content_copy_24"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/copy_uid_gi"/>
 
             <ImageView
@@ -90,7 +90,7 @@
             android:layout_height="34dp"
             android:id="@+id/hsr"
             app:cardCornerRadius="8dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:layout_centerVertical="true">
             <ImageView
                 android:layout_width="match_parent"
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_toStartOf="@id/copyclear_uid_hsr"
             android:layout_toEndOf="@id/hsr"
             android:background="@null"
@@ -111,21 +111,21 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:singleLine="true"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/copyclear_uid_hsr">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_content_copy_24"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/copy_uid_hsr"/>
 
             <ImageView
@@ -151,7 +151,7 @@
             android:layout_height="34dp"
             android:id="@+id/hi3"
             app:cardCornerRadius="8dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:layout_centerVertical="true">
             <ImageView
                 android:layout_width="match_parent"
@@ -164,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginVertical="5dp"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="15dp"
             android:layout_toStartOf="@id/copyclear_uid_hi3"
             android:layout_toEndOf="@id/hi3"
             android:background="@null"
@@ -172,21 +172,21 @@
             android:imeOptions="actionDone"
             android:inputType="number"
             android:singleLine="true"
-            android:textSize="16sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:id="@+id/copyclear_uid_hi3">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_content_copy_24"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/copy_uid_hi3"/>
 
             <ImageView
@@ -214,7 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/baseline_arrow_back2_24" />
+            android:src="@drawable/baseline_arrow_back3_24" />
 
         <TextView
             android:id="@+id/button_text"
@@ -226,7 +226,7 @@
             android:background="@null"
             android:text="Return"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
