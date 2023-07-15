@@ -21,80 +21,102 @@
             android:alpha="0.25"
             android:id="@+id/banner_img"/>
 
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_above="@id/app_name">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/gi"
-                app:cardCornerRadius="11dp"
-                android:layout_marginStart="15dp"
-                android:layout_toEndOf="@id/gi"
-                android:layout_centerVertical="true">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/gi48"/>
-            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/hsr"
-                app:cardCornerRadius="11dp"
-                android:layout_marginStart="15dp"
-                android:layout_toEndOf="@id/gi"
-                android:layout_centerVertical="true">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/hsr48"/>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/hi3"
-                app:cardCornerRadius="50dp"
-                android:layout_marginStart="15dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/genshin4"
-                android:layout_centerVertical="true">
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_gravity="center"
-                    app:cardBackgroundColor="@color/genshin4"
-                    android:layout_centerVertical="true">
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/gi"
+                    app:cardCornerRadius="11dp">
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/derpy"/>
+                        android:src="@drawable/gi48"/>
                 </androidx.cardview.widget.CardView>
-            </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/zzz"
-                app:cardCornerRadius="11dp"
-                android:layout_marginStart="15dp"
-                android:layout_toEndOf="@id/hi3"
-                android:layout_centerVertical="true">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/zzz48"/>
-            </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/hsr"
+                    app:cardCornerRadius="11dp"
+                    android:layout_marginStart="25dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/hsr48"/>
+                </androidx.cardview.widget.CardView>
 
-        </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/hi3"
+                    app:cardCornerRadius="50dp"
+                    android:layout_marginStart="25dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/genshin4">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="50dp"
+                        android:layout_margin="3dp"
+                        android:layout_gravity="center"
+                        app:cardBackgroundColor="@color/genshin4">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/derpy"/>
+                    </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/tot"
+                    app:cardCornerRadius="11dp"
+                    android:layout_marginStart="25dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/tot48"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/zzz"
+                    app:cardCornerRadius="11dp"
+                    android:layout_marginStart="25dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/zzz48"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/hoyo"
+                    app:cardCornerRadius="11dp"
+                    android:layout_marginStart="25dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/hoyo48"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/app_name"

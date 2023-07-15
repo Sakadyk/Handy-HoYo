@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,8 +25,8 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
-public class Genshin extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
+public class TearsOfThemis extends AppCompatActivity {
+    LinearLayout checkIn;
     CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
@@ -39,7 +37,7 @@ public class Genshin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_genshin);
+        setContentView(R.layout.activity_tears_of_themis);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         progressBar = findViewById(R.id.progress_bar);
@@ -57,14 +55,7 @@ public class Genshin extends AppCompatActivity {
         appZzz = findViewById(R.id.zzz);
         appHoyo = findViewById(R.id.hoyo);
 
-        checkIn = findViewById(R.id.check_in_gi);
-        redeemCode = findViewById(R.id.redeem_code_gi);
-        userId = findViewById(R.id.uid_gi);
-        battle = findViewById(R.id.battle_gi);
-        map = findViewById(R.id.map_gi);
-        wiki = findViewById(R.id.wiki_gi);
-        kqm = findViewById(R.id.keqing_mains);
-        enka = findViewById(R.id.enka_gi);
+        checkIn = findViewById(R.id.check_in_tot);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -85,13 +76,13 @@ public class Genshin extends AppCompatActivity {
                 progressBar.setProgress(newProgress);
             }
         });
-        loadMyUrl("https://paimon.moe/timeline");
+        loadMyUrl("https://tot.hoyoverse.com/m/en-us/information/all");
 
         webBack.setOnClickListener(new View.OnClickListener() {
             String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (!Objects.equals(urlHome, "https://paimon.moe/timeline")) {
+                if (!Objects.equals(urlHome, "https://tot.hoyoverse.com/m/en-us/information/all")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
@@ -144,7 +135,7 @@ public class Genshin extends AppCompatActivity {
         webHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://paimon.moe/timeline");
+                loadMyUrl("https://tot.hoyoverse.com/m/en-us/information/all");
             }
         });
 
@@ -161,72 +152,46 @@ public class Genshin extends AppCompatActivity {
         checkIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481");
+                loadMyUrl("https://act.hoyolab.com/bbs/event/signin/nxx/index.html?act_id=e202202281857121");
             }
         });
 
-        redeemCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadMyUrl("https://genshin.hoyoverse.com/m/en/gift");
-            }
-        });
+        appTot.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
 
-        userId.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (Genshin.this, UIDGenshin.class);
-                intent.putExtra("previousActivity", Genshin.class.getName());
-                startActivity(intent);
-                //overridePendingTransition(0, 0);
-                finish();
-            }
-        });
-
-        battle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/m.html");
-            }
-        });
-
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/ys/app/interactive-map/index.html");
-            }
-        });
-
-        wiki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadMyUrl("https://genshin-impact.fandom.com/");
-            }
-        });
-
-        kqm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadMyUrl("https://keqingmains.com/");
-            }
-        });
-
-        enka.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                String uidGiText = sharedPreferences.getString("uid_gi", "");
-
-                String url;
-                if (!uidGiText.isEmpty()) { url = "https://enka.network/u/" + uidGiText;
-                } else {
-                    url = "https://enka.network";
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(TearsOfThemis.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
                 }
-                loadMyUrl(url);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("uid_gi", uidGiText);
-                editor.apply();
+                return false;
             }
         });
 
@@ -246,7 +211,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(TearsOfThemis.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -257,7 +222,11 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(TearsOfThemis.this, Genshin.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
                         }
                         if (handler != null && runnable != null) {
                             handler.removeCallbacks(runnable);
@@ -285,7 +254,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(TearsOfThemis.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -296,7 +265,7 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, HonkaiStarRail.class);
+                            Intent intent = new Intent(TearsOfThemis.this, HonkaiStarRail.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);
@@ -328,7 +297,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(TearsOfThemis.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -339,50 +308,7 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, Honkai3rd.class);
-                            intent.putExtra("previousActivity", Genshin.class.getName());
-                            startActivity(intent);
-                            overridePendingTransition(0, 0);
-                            finish();
-                        }
-                        if (handler != null && runnable != null) {
-                            handler.removeCallbacks(runnable);
-                        }
-                        isLongClick = false;
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        appTot.setOnTouchListener(new View.OnTouchListener() {
-            private Handler handler;
-            private Runnable runnable;
-            private boolean isLongClick = false;
-
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
-                                intent.putExtra("previousActivity", Genshin.class.getName());
-                                startActivity(intent);
-                                finish();
-                            }
-                        };
-                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                        if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, TearsOfThemis.class);
+                            Intent intent = new Intent(TearsOfThemis.this, Honkai3rd.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);
@@ -414,7 +340,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(TearsOfThemis.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -425,7 +351,7 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, ZenlessZoneZero.class);
+                            Intent intent = new Intent(TearsOfThemis.this, ZenlessZoneZero.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);
@@ -457,7 +383,7 @@ public class Genshin extends AppCompatActivity {
                                 // Action to perform after long click duration (2 seconds)
                                 isLongClick = true;
                                 // Perform your desired action here
-                                Intent intent = new Intent(Genshin.this, SauceMaster.class);
+                                Intent intent = new Intent(TearsOfThemis.this, SauceMaster.class);
                                 intent.putExtra("previousActivity", Genshin.class.getName());
                                 startActivity(intent);
                                 finish();
@@ -468,7 +394,7 @@ public class Genshin extends AppCompatActivity {
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
-                            Intent intent = new Intent(Genshin.this, HoYoLAB.class);
+                            Intent intent = new Intent(TearsOfThemis.this, HoYoLAB.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);

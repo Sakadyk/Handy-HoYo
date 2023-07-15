@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class Honkai3rd extends AppCompatActivity {
     LinearLayout checkIn, userId, battle, wiki;
-    CardView appGi, appHsr, appHi3, appZzz;
+    CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
     ImageView webBack, webRefresh, webForward, webHome, webShare;
@@ -51,7 +51,9 @@ public class Honkai3rd extends AppCompatActivity {
         appGi = findViewById(R.id.gi);
         appHsr = findViewById(R.id.hsr);
         appHi3 = findViewById(R.id.hi3);
+        appTot = findViewById(R.id.tot);
         appZzz = findViewById(R.id.zzz);
+        appHoyo = findViewById(R.id.hoyo);
 
         checkIn = findViewById(R.id.check_in_hi3);
         userId = findViewById(R.id.uid_hi3);
@@ -77,13 +79,13 @@ public class Honkai3rd extends AppCompatActivity {
                 progressBar.setProgress(newProgress);
             }
         });
-        loadMyUrl("https://honkaiimpact3.hoyoverse.com/global/en-us/news");
+        loadMyUrl("https://honkaiimpact3.hoyoverse.com/m/global/en-us/news");
 
         webBack.setOnClickListener(new View.OnClickListener() {
             String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (!Objects.equals(urlHome, "https://honkaiimpact3.hoyoverse.com/global/en-us/news")) {
+                if (!Objects.equals(urlHome, "https://honkaiimpact3.hoyoverse.com/m/global/en-us/news")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
@@ -136,7 +138,7 @@ public class Honkai3rd extends AppCompatActivity {
         webHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://honkaiimpact3.hoyoverse.com/global/en-us/news");
+                loadMyUrl("https://honkaiimpact3.hoyoverse.com/m/global/en-us/news");
             }
         });
 
@@ -171,7 +173,7 @@ public class Honkai3rd extends AppCompatActivity {
         battle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html#/bh3");
+                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/m.html#/bh3");
             }
         });
 
@@ -308,6 +310,49 @@ public class Honkai3rd extends AppCompatActivity {
             }
         });
 
+        appTot.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(Honkai3rd.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(Honkai3rd.this, TearsOfThemis.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
         appZzz.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
@@ -337,6 +382,49 @@ public class Honkai3rd extends AppCompatActivity {
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
                             Intent intent = new Intent(Honkai3rd.this, ZenlessZoneZero.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        appHoyo.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(Honkai3rd.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(Honkai3rd.this, HoYoLAB.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);

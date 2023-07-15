@@ -25,9 +25,9 @@
 
         <TextView
             android:id="@+id/progresstext"
-            android:layout_width="80dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
+            android:textAlignment="center"
             android:textColor="@color/genshin"
             android:textSize="30sp"
             android:textStyle="bold"/>

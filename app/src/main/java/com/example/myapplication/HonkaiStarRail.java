@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class HonkaiStarRail extends AppCompatActivity {
     LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
-    CardView appGi, appHsr, appHi3, appZzz;
+    CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
     ImageView webBack, webRefresh, webForward, webHome, webShare;
@@ -51,7 +51,9 @@ public class HonkaiStarRail extends AppCompatActivity {
         appGi = findViewById(R.id.gi);
         appHsr = findViewById(R.id.hsr);
         appHi3 = findViewById(R.id.hi3);
+        appTot = findViewById(R.id.tot);
         appZzz = findViewById(R.id.zzz);
+        appHoyo = findViewById(R.id.hoyo);
 
         checkIn = findViewById(R.id.check_in_hsr);
         redeemCode = findViewById(R.id.redeem_code_hsr);
@@ -182,7 +184,7 @@ public class HonkaiStarRail extends AppCompatActivity {
         battle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/index.html#/hsr");
+                loadMyUrl("https://act.hoyolab.com/app/community-game-records-sea/m.html#/hsr");
             }
         });
 
@@ -352,6 +354,49 @@ public class HonkaiStarRail extends AppCompatActivity {
             }
         });
 
+        appTot.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(HonkaiStarRail.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(HonkaiStarRail.this, TearsOfThemis.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
         appZzz.setOnTouchListener(new View.OnTouchListener() {
             private Handler handler;
             private Runnable runnable;
@@ -380,6 +425,49 @@ public class HonkaiStarRail extends AppCompatActivity {
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
                             Intent intent = new Intent(HonkaiStarRail.this, ZenlessZoneZero.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        appHoyo.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(HonkaiStarRail.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(HonkaiStarRail.this, HoYoLAB.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);

@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ZenlessZoneZero">
+    tools:context=".TearsOfThemis">
 
     <RelativeLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/genshin2">
+        android:background="@color/gray">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="135dp"
-            android:src="@drawable/zzzbanner"
+            android:src="@drawable/totbanner"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:alpha="0.55"
@@ -24,7 +24,6 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/app_scroll_zzz"
             android:gravity="center"
             android:layout_marginTop="15dp"
             android:layout_above="@id/app_name">
@@ -79,18 +78,6 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/tot"
-                        app:cardCornerRadius="11dp"
-                        android:layout_marginStart="25dp">
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/tot48"/>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:id="@+id/zzz"
                         app:cardCornerRadius="50dp"
                         android:layout_marginStart="25dp"
                         app:cardElevation="0dp"
@@ -107,6 +94,18 @@
                                 android:layout_height="match_parent"
                                 android:src="@drawable/derpy"/>
                         </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/zzz"
+                        app:cardCornerRadius="11dp"
+                        android:layout_marginStart="25dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/zzz48"/>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -131,7 +130,7 @@
             android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Zenless Zone Zero"
+            android:text="Tears of Themis"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="25sp"
@@ -167,19 +166,19 @@
                 <LinearLayout
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signup_zzz"
+                    android:id="@+id/check_in_tot"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/signupzzz"/>
+                        android:src="@drawable/checktot"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sign-Up"
+                        android:text="Check in"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 

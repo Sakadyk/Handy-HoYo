@@ -18,6 +18,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,7 +28,7 @@ import java.util.Objects;
 
 public class ZenlessZoneZero extends AppCompatActivity {
     LinearLayout signUp;
-    CardView appGi, appHsr, appHi3, appZzz;
+    CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
     ImageView webBack, webRefresh, webForward, webHome, webShare;
@@ -51,7 +52,9 @@ public class ZenlessZoneZero extends AppCompatActivity {
         appGi = findViewById(R.id.gi);
         appHsr = findViewById(R.id.hsr);
         appHi3 = findViewById(R.id.hi3);
+        appTot = findViewById(R.id.tot);
         appZzz = findViewById(R.id.zzz);
+        appHoyo = findViewById(R.id.hoyo);
 
         signUp = findViewById(R.id.signup_zzz);
 
@@ -74,13 +77,17 @@ public class ZenlessZoneZero extends AppCompatActivity {
                 progressBar.setProgress(newProgress);
             }
         });
-        loadMyUrl("https://zenless.hoyoverse.com/en-us/news");
+        loadMyUrl("https://zenless.hoyoverse.com/m/en-us/news");
+
+        HorizontalScrollView horizontalScrollView = findViewById(R.id.app_scroll_zzz);
+        // Adjust the scroll position to reverse the scrolling direction
+        horizontalScrollView.post(() -> horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
 
         webBack.setOnClickListener(new View.OnClickListener() {
             String urlHome = webView.getUrl();
             @Override
             public void onClick(View view) {
-                if (!Objects.equals(urlHome, "https://zenless.hoyoverse.com/en-us/news")) {
+                if (!Objects.equals(urlHome, "https://zenless.hoyoverse.com/m/en-us/news")) {
                     webView.goBack();
                 } else {
                     long currentTime = System.currentTimeMillis();
@@ -133,7 +140,7 @@ public class ZenlessZoneZero extends AppCompatActivity {
         webHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://zenless.hoyoverse.com/en-us/news");
+                loadMyUrl("https://zenless.hoyoverse.com/m/en-us/news");
             }
         });
 
@@ -150,7 +157,7 @@ public class ZenlessZoneZero extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loadMyUrl("https://zenless.hoyoverse.com/en-us");
+                loadMyUrl("https://zenless.hoyoverse.com/m/en-us");
             }
         });
 
@@ -307,6 +314,92 @@ public class ZenlessZoneZero extends AppCompatActivity {
                     case MotionEvent.ACTION_CANCEL:
                         if (!isLongClick) {
                             Intent intent = new Intent(ZenlessZoneZero.this, Honkai3rd.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        appTot.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(ZenlessZoneZero.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(ZenlessZoneZero.this, TearsOfThemis.class);
+                            intent.putExtra("previousActivity", Genshin.class.getName());
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                            finish();
+                        }
+                        if (handler != null && runnable != null) {
+                            handler.removeCallbacks(runnable);
+                        }
+                        isLongClick = false;
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        appHoyo.setOnTouchListener(new View.OnTouchListener() {
+            private Handler handler;
+            private Runnable runnable;
+            private boolean isLongClick = false;
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        handler = new Handler();
+                        runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                // Action to perform after long click duration (2 seconds)
+                                isLongClick = true;
+                                // Perform your desired action here
+                                Intent intent = new Intent(ZenlessZoneZero.this, SauceMaster.class);
+                                intent.putExtra("previousActivity", Genshin.class.getName());
+                                startActivity(intent);
+                                finish();
+                            }
+                        };
+                        handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        if (!isLongClick) {
+                            Intent intent = new Intent(ZenlessZoneZero.this, HoYoLAB.class);
                             intent.putExtra("previousActivity", Genshin.class.getName());
                             startActivity(intent);
                             overridePendingTransition(0, 0);
