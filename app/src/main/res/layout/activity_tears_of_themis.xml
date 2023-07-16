@@ -19,7 +19,8 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:alpha="0.55"
-            android:id="@+id/banner_img"/>
+            android:id="@+id/banner_img"
+            android:importantForAccessibility="no" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -36,7 +37,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp">
+                    android:layout_marginHorizontal="15dp"
+                    tools:ignore="UselessParent">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="50dp"
@@ -47,7 +49,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/gi48"/>
+                            android:src="@drawable/gi48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -59,7 +62,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/hsr48"/>
+                            android:src="@drawable/hsr48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -71,7 +75,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/hi348"/>
+                            android:src="@drawable/hi348"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -92,7 +97,8 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/derpy"/>
+                                android:src="@drawable/derpy"
+                                android:importantForAccessibility="no" />
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
@@ -105,7 +111,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/zzz48"/>
+                            android:src="@drawable/zzz48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -117,7 +124,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/hoyo48"/>
+                            android:src="@drawable/hoyo48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
@@ -130,7 +138,7 @@
             android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tears of Themis"
+            android:text="@string/tears_of_themis"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="25sp"
@@ -154,31 +162,34 @@
         android:layout_below="@id/app_bar">
 
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                tools:ignore="UselessParent">
 
                 <LinearLayout
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/check_in_tot"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/checktot"/>
+                        android:src="@drawable/checktot"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Check in"
+                        android:text="@string/check_in3"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 
@@ -191,17 +202,19 @@
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/check_in_tot"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/redeemtot"/>
+                        android:src="@drawable/redeemtot"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Redemption Code"
+                        android:text="@string/redemption_code"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 
@@ -214,12 +227,14 @@
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/redeem_code_tot"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/uidtot"/>
+                        android:src="@drawable/uidtot"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -237,17 +252,19 @@
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/uid_tot"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/wikitot"/>
+                        android:src="@drawable/wikitot"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tears of Themis Wiki"
+                        android:text="@string/tears_of_themis_wiki"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 
@@ -305,7 +322,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_back" />
+            android:id="@+id/web_back"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:layout_width="24dp"
@@ -314,7 +332,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_forward" />
+            android:id="@+id/web_forward"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:layout_width="24dp"
@@ -323,7 +342,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_home" />
+            android:id="@+id/web_home"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:id="@+id/web_refresh"
@@ -332,7 +352,8 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="10dp"
-            android:src="@drawable/baseline_refresh_24" />
+            android:src="@drawable/baseline_refresh_24"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:layout_width="24dp"
@@ -341,7 +362,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_share" />
+            android:id="@+id/web_share"
+            android:importantForAccessibility="no" />
 
     </LinearLayout>
 

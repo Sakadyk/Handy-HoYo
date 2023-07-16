@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -17,7 +16,6 @@ import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -178,16 +176,13 @@ public class MethodUtils {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         handler = new Handler();
-                        runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // Action to perform after long click duration (2 seconds)
-                                isLongClick = true;
-                                // Perform your desired action here
-                                Intent intent = new Intent(webView.getContext(), SauceMaster.class);
-                                intent.putExtra("previousActivity", webView.getContext().getClass().getName());
-                                webView.getContext().startActivity(intent);
-                            }
+                        runnable = () -> {
+                            // Action to perform after long click duration (2 seconds)
+                            isLongClick = true;
+                            // Perform your desired action here
+                            Intent intent = new Intent(webView.getContext(), SauceMaster.class);
+                            intent.putExtra("previousActivity", webView.getContext().getClass().getName());
+                            webView.getContext().startActivity(intent);
                         };
                         handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
                         return true;
@@ -239,33 +234,24 @@ public class MethodUtils {
 
         SpannableString positiveText = new SpannableString("Open");
         positiveText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, positiveText.length(), 0);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // Open the image in the default phone web browser
-                Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
-                activity.startActivity(intent);
-            }
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, (dialogInterface, i) -> {
+            // Open the image in the default phone web browser
+            Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
+            activity.startActivity(intent);
         });
 
         SpannableString negativeText = new SpannableString("Cancel");
         negativeText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, negativeText.length(), 0);
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // User cancelled, do nothing
-            }
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, (dialogInterface, i) -> {
+            // User cancelled, do nothing
         });
 
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                // Get the dialog's window
-                Window window = dialog.getWindow();
-                if (window != null) {
-                    // Set the background drawable with rounded corners
-                    window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
-                }
+        dialog.setOnShowListener(dialogInterface -> {
+            // Get the dialog's window
+            Window window = dialog.getWindow();
+            if (window != null) {
+                // Set the background drawable with rounded corners
+                window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
             }
         });
         dialog.show();
@@ -280,33 +266,24 @@ public class MethodUtils {
 
         SpannableString positiveText = new SpannableString("Open");
         positiveText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, positiveText.length(), 0);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // Open the image in the default phone web browser
-                Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
-                activity.startActivity(intent);
-            }
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, (dialogInterface, i) -> {
+            // Open the image in the default phone web browser
+            Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
+            activity.startActivity(intent);
         });
 
         SpannableString negativeText = new SpannableString("Cancel");
         negativeText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, negativeText.length(), 0);
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // User cancelled, do nothing
-            }
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, (dialogInterface, i) -> {
+            // User cancelled, do nothing
         });
 
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                // Get the dialog's window
-                Window window = dialog.getWindow();
-                if (window != null) {
-                    // Set the background drawable with rounded corners
-                    window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
-                }
+        dialog.setOnShowListener(dialogInterface -> {
+            // Get the dialog's window
+            Window window = dialog.getWindow();
+            if (window != null) {
+                // Set the background drawable with rounded corners
+                window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
             }
         });
         dialog.show();

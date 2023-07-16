@@ -19,7 +19,8 @@
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:alpha="0.25"
-            android:id="@+id/banner_img"/>
+            android:id="@+id/banner_img"
+            android:importantForAccessibility="no" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -36,7 +37,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp">
+                    android:layout_marginHorizontal="15dp"
+                    tools:ignore="UselessParent">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="50dp"
@@ -46,7 +48,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/gi48"/>
+                            android:src="@drawable/gi48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -58,7 +61,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/hsr48"/>
+                            android:src="@drawable/hsr48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -79,7 +83,8 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/derpy"/>
+                                android:src="@drawable/derpy"
+                                android:importantForAccessibility="no" />
                         </androidx.cardview.widget.CardView>
                     </androidx.cardview.widget.CardView>
 
@@ -92,7 +97,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/tot48"/>
+                            android:src="@drawable/tot48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -104,7 +110,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/zzz48"/>
+                            android:src="@drawable/zzz48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
@@ -116,7 +123,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/hoyo48"/>
+                            android:src="@drawable/hoyo48"
+                            android:importantForAccessibility="no" />
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
@@ -153,31 +161,34 @@
         android:layout_below="@id/app_bar">
 
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                tools:ignore="UselessParent">
 
                 <LinearLayout
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/check_in_hi3"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/checkhi3"/>
+                        android:src="@drawable/checkhi3"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Check-In"
+                        android:text="@string/check_in"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 
@@ -190,12 +201,14 @@
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/check_in_hi3"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/uidhi3"/>
+                        android:src="@drawable/uidhi3"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -213,17 +226,19 @@
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/uid_hi3"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/battlehi3"/>
+                        android:src="@drawable/battlehi3"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Battle Chronicle"
+                        android:text="@string/battle_chronicle"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 
@@ -236,17 +251,19 @@
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/battle_hi3"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/wikihi3"/>
+                        android:src="@drawable/wikihi3"
+                        android:importantForAccessibility="no" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Honkai Impact 3rd Wiki"
+                        android:text="@string/honkai_impact_3rd_wiki"
                         android:textSize="11sp"
                         android:textAlignment="center"/>
 
@@ -304,7 +321,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_back" />
+            android:id="@+id/web_back"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:layout_width="24dp"
@@ -313,7 +331,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_forward" />
+            android:id="@+id/web_forward"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:layout_width="24dp"
@@ -322,7 +341,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_home" />
+            android:id="@+id/web_home"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:id="@+id/web_refresh"
@@ -331,7 +351,8 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="10dp"
-            android:src="@drawable/baseline_refresh_24" />
+            android:src="@drawable/baseline_refresh_24"
+            android:importantForAccessibility="no" />
 
         <ImageView
             android:layout_width="24dp"
@@ -340,7 +361,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_weight="1"
             android:padding="10dp"
-            android:id="@+id/web_share" />
+            android:id="@+id/web_share"
+            android:importantForAccessibility="no" />
 
     </LinearLayout>
 

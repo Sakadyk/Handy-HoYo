@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -18,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Methods.MethodUtils;
 
@@ -134,138 +134,111 @@ public class UID extends AppCompatActivity {
             }
         });
 
-        copy_gi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the text from uid_gi EditText
-                String uidGiText = uid_gi.getText().toString();
+        copy_gi.setOnClickListener(view -> {
+            // Get the text from uid_gi EditText
+            String uidGiText1 = uid_gi.getText().toString();
 
-                // Check if the EditText is empty
-                if (uidGiText.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Copy the text to the clipboard
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copied UID", uidGiText);
-                clipboard.setPrimaryClip(clip);
-
-                // Display a Toast message
-                Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
+            // Check if the EditText is empty
+            if (uidGiText1.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Copy the text to the clipboard
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied UID", uidGiText1);
+            clipboard.setPrimaryClip(clip);
+
+            // Display a Toast message
+            Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
         });
-        clear_gi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Clear the text of uid_gi EditText
-                uid_gi.setText("");
-            }
+        clear_gi.setOnClickListener(view -> {
+            // Clear the text of uid_gi EditText
+            uid_gi.setText("");
         });
 
-        copy_hsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the text from uid_hsr EditText
-                String uidHsrText = uid_hsr.getText().toString();
+        copy_hsr.setOnClickListener(view -> {
+            // Get the text from uid_hsr EditText
+            String uidHsrText1 = uid_hsr.getText().toString();
 
-                // Check if the EditText is empty
-                if (uidHsrText.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Copy the text to the clipboard
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copied UID", uidHsrText);
-                clipboard.setPrimaryClip(clip);
-
-                // Display a Toast message
-                Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
+            // Check if the EditText is empty
+            if (uidHsrText1.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Copy the text to the clipboard
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied UID", uidHsrText1);
+            clipboard.setPrimaryClip(clip);
+
+            // Display a Toast message
+            Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
         });
-        clear_hsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Clear the text of uid_gi EditText
-                uid_hsr.setText("");
-            }
+        clear_hsr.setOnClickListener(view -> {
+            // Clear the text of uid_gi EditText
+            uid_hsr.setText("");
         });
 
-        copy_hi3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the text from uid_hi3 EditText
-                String uidHi3Text = uid_hi3.getText().toString();
+        copy_hi3.setOnClickListener(view -> {
+            // Get the text from uid_hi3 EditText
+            String uidHi3Text1 = uid_hi3.getText().toString();
 
-                // Check if the EditText is empty
-                if (uidHi3Text.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Copy the text to the clipboard
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copied UID", uidHi3Text);
-                clipboard.setPrimaryClip(clip);
-
-                // Display a Toast message
-                Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
+            // Check if the EditText is empty
+            if (uidHi3Text1.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Copy the text to the clipboard
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied UID", uidHi3Text1);
+            clipboard.setPrimaryClip(clip);
+
+            // Display a Toast message
+            Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
         });
-        clear_hi3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Clear the text of uid_gi EditText
-                uid_hi3.setText("");
-            }
+        clear_hi3.setOnClickListener(view -> {
+            // Clear the text of uid_gi EditText
+            uid_hi3.setText("");
         });
 
-        copy_tot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the text from uid_tot EditText
-                String uidTotText = uid_tot.getText().toString();
+        copy_tot.setOnClickListener(view -> {
+            // Get the text from uid_tot EditText
+            String uidTotText1 = uid_tot.getText().toString();
 
-                // Check if the EditText is empty
-                if (uidTotText.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Copy the text to the clipboard
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Copied UID", uidTotText);
-                clipboard.setPrimaryClip(clip);
-
-                // Display a Toast message
-                Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
+            // Check if the EditText is empty
+            if (uidTotText1.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Copy the text to the clipboard
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Copied UID", uidTotText1);
+            clipboard.setPrimaryClip(clip);
+
+            // Display a Toast message
+            Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
         });
-        clear_tot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Clear the text of uid_gi EditText
-                uid_tot.setText("");
-            }
+        clear_tot.setOnClickListener(view -> {
+            // Clear the text of uid_gi EditText
+            uid_tot.setText("");
         });
 
-        returnToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the class name of the previous activity
-                String previousActivityClassName = getIntent().getStringExtra("previousActivity");
+        returnToMain.setOnClickListener(view -> {
+            // Get the class name of the previous activity
+            String previousActivityClassName = getIntent().getStringExtra("previousActivity");
 
-                if (previousActivityClassName != null) {
-                    try {
-                        // Create an Intent for the previous activity using its class name
-                        Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                        Intent intent = new Intent(UID.this, previousActivityClass);
-                        startActivity(intent);
-                        finish();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            if (previousActivityClassName != null) {
+                try {
+                    // Create an Intent for the previous activity using its class name
+                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                    Intent intent = new Intent(UID.this, previousActivityClass);
+                    startActivity(intent);
+                    finish();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         });

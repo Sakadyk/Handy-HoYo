@@ -1,8 +1,6 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,9 +9,12 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+@SuppressWarnings({"BusyWait", "IntegerDivisionInFloatingPointContext"})
+@SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
     ProgressBar progressBar;
     TextView textView;
@@ -30,15 +31,11 @@ public class SplashScreen extends AppCompatActivity {
         textView = findViewById(R.id.progresstext);
         gifImageView = findViewById(R.id.gif);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                startProgress();
-            }
-        });
+        Thread thread = new Thread(this::startProgress);
         thread.start();
     }
 
+    @SuppressLint("SetTextI18n")
     public void startProgress() {
         for (value = 0; value < 100; value++) {
             try {
@@ -49,18 +46,12 @@ public class SplashScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    textView.setText(String.valueOf(value + "%"));
-                }
-            });
+            handler.post(() -> textView.setText(value + "%"));
         }
         run();
     }
 
     public void moveGif() {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) gifImageView.getLayoutParams();
         float progressBarWidth = progressBar.getWidth();
         float progress = progressBar.getProgress();
         float maxProgress = progressBar.getMax();

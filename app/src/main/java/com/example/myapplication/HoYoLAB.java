@@ -1,28 +1,22 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.myapplication.Methods.MethodUtils;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import java.util.Objects;
+import com.example.myapplication.Methods.MethodUtils;
 
 public class HoYoLAB extends AppCompatActivity {
     LinearLayout mimoDash;
@@ -31,6 +25,7 @@ public class HoYoLAB extends AppCompatActivity {
     ProgressBar progressBar;
     ImageView webBack, webRefresh, webForward, webHome, webShare;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,79 +80,26 @@ public class HoYoLAB extends AppCompatActivity {
 
         //Web Buttons
         MethodUtils.BrowserBackForward browserBackForward = new MethodUtils.BrowserBackForward(webView, defaultURL);
-        webBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleBackButton();
-            }
-        });
-        webForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleForwardButton();
-            }
-        });
-        webRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                webView.reload();
-            }
-        });
+        webBack.setOnClickListener(view -> browserBackForward.handleBackButton());
+        webForward.setOnClickListener(view -> browserBackForward.handleForwardButton());
+        webRefresh.setOnClickListener(view -> webView.reload());
         MethodUtils.handleHomeButton(webView, webHome, defaultURL);
-        webShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
-                startActivity(Intent.createChooser(intent, "Share URL"));
-            }
+        webShare.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+            startActivity(Intent.createChooser(intent, "Share URL"));
         });
 
         //Features (lol)
-        mimoDash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/bbs/event/e20220401-april-fools/index.html");
-            }
-        });
+        mimoDash.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/bbs/event/e20220401-april-fools/index.html"));
 
         //App Buttons
-        appGi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, Genshin.class);
-            }
-        });
-        appHsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, HonkaiStarRail.class);
-            }
-        });
-        appHi3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, Honkai3rd.class);
-            }
-        });
-        appTot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, TearsOfThemis.class);
-            }
-        });
-        appZzz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, ZenlessZoneZero.class);
-            }
-        });
-        appHoyo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
-            }
-        });
+        appGi.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, Genshin.class));
+        appHsr.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, HonkaiStarRail.class));
+        appHi3.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, Honkai3rd.class));
+        appTot.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, TearsOfThemis.class));
+        appZzz.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HoYoLAB.this, ZenlessZoneZero.class));
+        appHoyo.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show());
     }
 }

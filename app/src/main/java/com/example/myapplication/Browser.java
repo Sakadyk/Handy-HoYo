@@ -1,37 +1,22 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.TextAppearanceSpan;
-import android.util.Patterns;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.Methods.MethodUtils;
 
@@ -42,6 +27,7 @@ public class Browser extends AppCompatActivity {
     ProgressBar progressBar;
     ImageView webBack,webForward,webRefresh,webShare, returnToHome;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,69 +74,40 @@ public class Browser extends AppCompatActivity {
         MethodUtils.loadMyUrl(webView, url);
 
         //Web Buttons
-        urlInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if(i == EditorInfo.IME_ACTION_GO || i == EditorInfo.IME_ACTION_DONE){
-                    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(urlInput.getWindowToken(),0);
-                    MethodUtils.loadMyUrl(webView, urlInput.getText().toString());
-                    return true;
-                }
-                return false;
+        urlInput.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if(i == EditorInfo.IME_ACTION_GO || i == EditorInfo.IME_ACTION_DONE){
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(urlInput.getWindowToken(),0);
+                MethodUtils.loadMyUrl(webView, urlInput.getText().toString());
+                return true;
             }
+            return false;
         });
-        clearUrl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                urlInput.setText("");
-            }
-        });
+        clearUrl.setOnClickListener(view -> urlInput.setText(""));
         MethodUtils.BrowserBackForward browserBackForward = new MethodUtils.BrowserBackForward(webView, url);
-        webBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleBackButtonSecret();
-            }
+        webBack.setOnClickListener(view -> browserBackForward.handleBackButtonSecret());
+        webForward.setOnClickListener(view -> browserBackForward.handleForwardButton());
+        webRefresh.setOnClickListener(view -> webView.reload());
+        webShare.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+            startActivity(Intent.createChooser(intent, "Share URL"));
         });
-        webForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleForwardButton();
-            }
-        });
-        webRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                webView.reload();
-            }
-        });
-        webShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
-                startActivity(Intent.createChooser(intent, "Share URL"));
-            }
-        });
-        returnToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Get the class name of the previous activity
-                String previousActivityClassName = getIntent().getStringExtra("previousActivity");
+        returnToHome.setOnClickListener(view -> {
+            // Get the class name of the previous activity
+            String previousActivityClassName = getIntent().getStringExtra("previousActivity");
 
-                if (previousActivityClassName != null) {
-                    try {
-                        // Create an Intent for the previous activity using its class name
-                        Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                        Intent intent = new Intent(Browser.this, previousActivityClass);
-                        startActivity(intent);
-                        webView.clearHistory();
-                        finish();
-                    } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
+            if (previousActivityClassName != null) {
+                try {
+                    // Create an Intent for the previous activity using its class name
+                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                    Intent intent = new Intent(Browser.this, previousActivityClass);
+                    startActivity(intent);
+                    webView.clearHistory();
+                    finish();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         });

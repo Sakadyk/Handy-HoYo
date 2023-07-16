@@ -1,25 +1,21 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.myapplication.Methods.MethodUtils;
 
@@ -30,6 +26,7 @@ public class Genshin extends AppCompatActivity {
     ProgressBar progressBar;
     ImageView webBack, webRefresh, webForward, webHome, webShare;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,139 +85,48 @@ public class Genshin extends AppCompatActivity {
 
         //Web Buttons
         MethodUtils.BrowserBackForward browserBackForward = new MethodUtils.BrowserBackForward(webView, defaultUrl);
-        webBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleBackButton();
-            }
-        });
-        webForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleForwardButton();
-            }
-        });
-        webRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                webView.reload();
-            }
-        });
+        webBack.setOnClickListener(view -> browserBackForward.handleBackButton());
+        webForward.setOnClickListener(view -> browserBackForward.handleForwardButton());
+        webRefresh.setOnClickListener(view -> webView.reload());
         MethodUtils.handleHomeButton(webView, webHome, defaultUrl);
-        webShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
-                startActivity(Intent.createChooser(intent, "Share URL"));
-            }
+        webShare.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+            startActivity(Intent.createChooser(intent, "Share URL"));
         });
 
         //Features
-        checkIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481");
-            }
-        });
-        redeemCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://genshin.hoyoverse.com/m/en/gift");
-            }
-        });
-        userId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.startActivityWithAnimation(Genshin.this, UID.class);
-            }
-        });
-        battle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/app/community-game-records-sea/m.html");
-            }
-        });
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/app/interactive-map/index.html");
-            }
-        });
-        wiki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://genshin-impact.fandom.com/");
-            }
-        });
-        calc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/event/calculator-sea/index.html");
-            }
-        });
-        kqm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://keqingmains.com/");
-            }
-        });
-        enka.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                String uidGiText = sharedPreferences.getString("uid_gi", "");
+        checkIn.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481"));
+        redeemCode.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://genshin.hoyoverse.com/m/en/gift"));
+        userId.setOnClickListener(view -> MethodUtils.startActivityWithAnimation(Genshin.this, UID.class));
+        battle.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/app/community-game-records-sea/m.html"));
+        map.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/app/interactive-map/index.html"));
+        wiki.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://genshin-impact.fandom.com/"));
+        calc.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/event/calculator-sea/index.html"));
+        kqm.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://keqingmains.com/"));
+        enka.setOnClickListener(view -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            String uidGiText = sharedPreferences.getString("uid_gi", "");
 
-                String url;
-                if (!uidGiText.isEmpty()) { url = "https://enka.network/u/" + uidGiText;
-                } else {
-                    url = "https://enka.network";
-                }
-                MethodUtils.loadMyUrl(webView, url);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("uid_gi", uidGiText);
-                editor.apply();
+            String url;
+            if (!uidGiText.isEmpty()) { url = "https://enka.network/u/" + uidGiText;
+            } else {
+                url = "https://enka.network";
             }
+            MethodUtils.loadMyUrl(webView, url);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("uid_gi", uidGiText);
+            editor.apply();
         });
 
         //App Buttons
-        appGi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
-            }
-        });
-        appHsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(Genshin.this, HonkaiStarRail.class);
-            }
-        });
-        appHi3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(Genshin.this, Honkai3rd.class);
-            }
-        });
-        appTot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(Genshin.this, TearsOfThemis.class);
-            }
-        });
-        appZzz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(Genshin.this, ZenlessZoneZero.class);
-            }
-        });
-        appHoyo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(Genshin.this, HoYoLAB.class);
-            }
-        });
+        appGi.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show());
+        appHsr.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(Genshin.this, HonkaiStarRail.class));
+        appHi3.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(Genshin.this, Honkai3rd.class));
+        appTot.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(Genshin.this, TearsOfThemis.class));
+        appZzz.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(Genshin.this, ZenlessZoneZero.class));
+        appHoyo.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(Genshin.this, HoYoLAB.class));
     }
 }

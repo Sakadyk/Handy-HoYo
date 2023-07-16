@@ -1,27 +1,21 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.myapplication.Methods.MethodUtils;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import java.util.Objects;
+import com.example.myapplication.Methods.MethodUtils;
 
 public class HonkaiStarRail extends AppCompatActivity {
     LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
@@ -30,6 +24,7 @@ public class HonkaiStarRail extends AppCompatActivity {
     ProgressBar progressBar;
     ImageView webBack, webRefresh, webForward, webHome, webShare;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,134 +82,33 @@ public class HonkaiStarRail extends AppCompatActivity {
 
         //Buttons
         MethodUtils.BrowserBackForward browserBackForward = new MethodUtils.BrowserBackForward(webView, defaultUrl);
-        webBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleBackButton();
-            }
-        });
-        webForward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                browserBackForward.handleForwardButton();
-            }
-        });
-        webRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                webView.reload();
-            }
-        });
+        webBack.setOnClickListener(view -> browserBackForward.handleBackButton());
+        webForward.setOnClickListener(view -> browserBackForward.handleForwardButton());
+        webRefresh.setOnClickListener(view -> webView.reload());
         MethodUtils.handleHomeButton(webView, webHome, defaultUrl);
-        webShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
-                startActivity(Intent.createChooser(intent, "Share URL"));
-            }
+        webShare.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+            startActivity(Intent.createChooser(intent, "Share URL"));
         });
 
         //Features
-        checkIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311");
-            }
-        });
-        redeemCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://hsr.hoyoverse.com/gift");
-            }
-        });
-        userId.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.startActivityWithAnimation(HonkaiStarRail.this, UID.class);
-            }
-        });
-        battle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/app/community-game-records-sea/m.html#/hsr");
-            }
-        });
-        map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/sr/app/interactive-map/index.html");
-            }
-        });
-        wiki.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://honkai-star-rail.fandom.com/");
-            }
-        });
-        kqm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MethodUtils.loadMyUrl(webView, "https://hsr.keqingmains.com/");
-            }
-        });
-        enka.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                String uidHsrText = sharedPreferences.getString("uid_hsr", "");
-
-                String url;
-                if (!uidHsrText.isEmpty()) { url = "https://enka.network/u/" + uidHsrText;
-                } else {
-                    url = "https://enka.network";
-                }
-                loadMyUrl(url);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("uid_hsr", uidHsrText);
-                editor.apply();*/
-                Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show();
-            }
-        });
+        checkIn.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/bbs/event/signin/hkrpg/index.html?act_id=e202303301540311"));
+        redeemCode.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://hsr.hoyoverse.com/gift"));
+        userId.setOnClickListener(view -> MethodUtils.startActivityWithAnimation(HonkaiStarRail.this, UID.class));
+        battle.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/app/community-game-records-sea/m.html#/hsr"));
+        map.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/sr/app/interactive-map/index.html"));
+        wiki.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://honkai-star-rail.fandom.com/"));
+        kqm.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://hsr.keqingmains.com/"));
+        enka.setOnClickListener(view -> Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show());
 
         //App Buttons
-        appGi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, Genshin.class);
-            }
-        });
-        appHsr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show();
-            }
-        });
-        appHi3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, Honkai3rd.class);
-            }
-        });
-        appTot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, TearsOfThemis.class);
-            }
-        });
-        appZzz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, ZenlessZoneZero.class);
-            }
-        });
-        appHoyo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, HoYoLAB.class);
-            }
-        });
+        appGi.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, Genshin.class));
+        appHsr.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Already in it", Toast.LENGTH_SHORT).show());
+        appHi3.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, Honkai3rd.class));
+        appTot.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, TearsOfThemis.class));
+        appZzz.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, ZenlessZoneZero.class));
+        appHoyo.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, HoYoLAB.class));
     }
 }

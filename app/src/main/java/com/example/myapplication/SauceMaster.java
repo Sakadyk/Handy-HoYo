@@ -1,14 +1,10 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,7 +12,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.Methods.MethodUtils;
 
@@ -45,44 +43,27 @@ public class SauceMaster extends AppCompatActivity {
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
-        audioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
-            @Override
-            public void onAudioFocusChange(int focusChange) {
-                switch (focusChange) {
-                    case AudioManager.AUDIOFOCUS_LOSS:
-                        // Stop playback and release MediaPlayer resources
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                        mediaPlayer = null;
-                        break;
-                }
+        audioFocusChangeListener = focusChange -> {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {// Stop playback and release MediaPlayer resources
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = null;
             }
         };
 
-        code.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_GO || i == EditorInfo.IME_ACTION_DONE) {
-                    performButtonClick();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        code.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_GO || i == EditorInfo.IME_ACTION_DONE) {
                 performButtonClick();
+                return true;
             }
+            return false;
         });
 
-        clearCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Clear the text of uid_gi EditText
-                code.setText("");
-            }
+        button.setOnClickListener(view -> performButtonClick());
+
+        clearCode.setOnClickListener(view -> {
+            // Clear the text of uid_gi EditText
+            code.setText("");
         });
     }
 
