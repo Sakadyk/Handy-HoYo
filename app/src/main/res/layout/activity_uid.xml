@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:paddingHorizontal="30dp"
-    tools:context=".UIDGenshin">
+    tools:context=".UID">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="30dp"
         android:src="@drawable/derpaimon"
         android:contentDescription="@string/paimon_derp" />
 
@@ -200,11 +199,72 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_below="@id/hi3_fields"
+        android:id="@+id/tot_fields">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:id="@+id/tot"
+            app:cardCornerRadius="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/tot48"/>
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/uid_tot_text"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_toStartOf="@id/copyclear_uid_tot"
+            android:layout_toEndOf="@id/tot"
+            android:background="@null"
+            android:hint="@string/type_uid"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/copyclear_uid_tot">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_content_copy_24"
+                android:layout_marginRight="10dp"
+                android:id="@+id/copy_uid_tot"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_cancel_24"
+                android:id="@+id/clear_uid_tot"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/hi3_fields"
+        android:layout_below="@id/tot_fields"
         android:background="@drawable/rounded_corner3"
         android:gravity="center"
         android:padding="8dp">

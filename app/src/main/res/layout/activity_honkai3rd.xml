@@ -241,7 +241,7 @@
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/battle"/>
+                        android:src="@drawable/wikihi3"/>
 
                     <TextView
                         android:layout_width="match_parent"

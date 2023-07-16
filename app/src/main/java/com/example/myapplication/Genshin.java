@@ -36,7 +36,7 @@ import android.widget.Toast;
 import java.util.Objects;
 
 public class Genshin extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
+    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, calc, kqm, enka;
     CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
@@ -71,6 +71,7 @@ public class Genshin extends AppCompatActivity {
         battle = findViewById(R.id.battle_gi);
         map = findViewById(R.id.map_gi);
         wiki = findViewById(R.id.wiki_gi);
+        calc = findViewById(R.id.calc_gi);
         kqm = findViewById(R.id.keqing_mains);
         enka = findViewById(R.id.enka_gi);
 
@@ -249,7 +250,7 @@ public class Genshin extends AppCompatActivity {
         userId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (Genshin.this, UIDGenshin.class);
+                Intent intent = new Intent (Genshin.this, UID.class);
                 intent.putExtra("previousActivity", Genshin.class.getName());
                 startActivity(intent);
                 //overridePendingTransition(0, 0);
@@ -275,6 +276,13 @@ public class Genshin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadMyUrl("https://genshin-impact.fandom.com/");
+            }
+        });
+
+        calc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadMyUrl("https://act.hoyolab.com/ys/event/calculator-sea/index.html");
             }
         });
 

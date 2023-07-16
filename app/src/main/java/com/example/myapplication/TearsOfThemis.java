@@ -34,7 +34,7 @@ import android.widget.Toast;
 import java.util.Objects;
 
 public class TearsOfThemis extends AppCompatActivity {
-    LinearLayout checkIn;
+    LinearLayout checkIn, redeemCode, userId, wiki;
     CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
@@ -64,6 +64,9 @@ public class TearsOfThemis extends AppCompatActivity {
         appHoyo = findViewById(R.id.hoyo);
 
         checkIn = findViewById(R.id.check_in_tot);
+        redeemCode = findViewById(R.id.redeem_code_tot);
+        userId = findViewById(R.id.uid_tot);
+        wiki = findViewById(R.id.wiki_tot);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -227,6 +230,31 @@ public class TearsOfThemis extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadMyUrl("https://act.hoyolab.com/bbs/event/signin/nxx/index.html?act_id=e202202281857121");
+            }
+        });
+
+        redeemCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadMyUrl("https://tot.hoyoverse.com/gift/#/");
+            }
+        });
+
+        userId.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (TearsOfThemis.this, UID.class);
+                intent.putExtra("previousActivity", TearsOfThemis.class.getName());
+                startActivity(intent);
+                //overridePendingTransition(0, 0);
+                finish();
+            }
+        });
+
+        wiki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadMyUrl("https://tearsofthemis.fandom.com/");
             }
         });
 

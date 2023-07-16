@@ -184,6 +184,75 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/redeem_code_tot"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/check_in_tot"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/redeemtot"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Redemption Code"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/uid_tot"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/redeem_code_tot"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/uidtot"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_id"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wiki_tot"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/uid_tot"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/wikitot"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tears of Themis Wiki"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
             </RelativeLayout>
 
         </FrameLayout>

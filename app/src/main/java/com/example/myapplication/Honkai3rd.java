@@ -236,7 +236,7 @@ public class Honkai3rd extends AppCompatActivity {
         userId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (Honkai3rd.this, UIDGenshin.class);
+                Intent intent = new Intent (Honkai3rd.this, UID.class);
                 intent.putExtra("previousActivity", Honkai3rd.class.getName());
                 startActivity(intent);
                 //overridePendingTransition(0, 0);

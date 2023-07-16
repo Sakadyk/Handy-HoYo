@@ -46,7 +46,7 @@ public class Browser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browser);
-        getWindow().setStatusBarColor(ContextCompat.getColor(Browser.this, R.color.genshin2));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Browser.this, R.color.nhcolor));
 
         urlInput = findViewById(R.id.url_input);
         clearUrl = findViewById(R.id.clear_icon);

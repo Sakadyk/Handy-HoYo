@@ -247,7 +247,7 @@ public class HonkaiStarRail extends AppCompatActivity {
         userId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (HonkaiStarRail.this, UIDGenshin.class);
+                Intent intent = new Intent (HonkaiStarRail.this, UID.class);
                 intent.putExtra("previousActivity", HonkaiStarRail.class.getName());
                 startActivity(intent);
                 //overridePendingTransition(0, 0);

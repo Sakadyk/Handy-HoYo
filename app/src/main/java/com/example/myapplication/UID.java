@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -13,41 +12,48 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class UIDGenshin extends AppCompatActivity {
-    EditText uid_gi, uid_hsr, uid_hi3;
-    ImageView copy_gi, copy_hsr, copy_hi3, clear_gi, clear_hsr, clear_hi3;
+public class UID extends AppCompatActivity {
+    EditText uid_gi, uid_hsr, uid_hi3, uid_tot;
+    ImageView copy_gi, copy_hsr, copy_hi3, copy_tot, clear_gi, clear_hsr, clear_hi3, clear_tot;
     RelativeLayout returnToMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uid);
-        getWindow().setStatusBarColor(ContextCompat.getColor(UIDGenshin.this, R.color.genshin));
+        //getWindow().setStatusBarColor(ContextCompat.getColor(UIDGenshin.this, R.color.genshin));
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         copy_gi = findViewById(R.id.copy_uid_gi);
         copy_hsr = findViewById(R.id.copy_uid_hsr);
         copy_hi3 = findViewById(R.id.copy_uid_hi3);
+        copy_tot = findViewById(R.id.copy_uid_tot);
         clear_gi = findViewById(R.id.clear_uid_gi);
         clear_hsr = findViewById(R.id.clear_uid_hsr);
         clear_hi3 = findViewById(R.id.clear_uid_hi3);
+        clear_tot = findViewById(R.id.clear_uid_tot);
         uid_gi = findViewById(R.id.uid_gi_text);
         uid_hsr = findViewById(R.id.uid_hsr_text);
         uid_hi3 = findViewById(R.id.uid_hi3_text);
+        uid_tot = findViewById(R.id.uid_tot_text);
         returnToMain = findViewById(R.id.button);
 
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         String uidGiText = sharedPreferences.getString("uid_gi", "");
         String uidHsrText = sharedPreferences.getString("uid_hsr", "");
         String uidHi3Text = sharedPreferences.getString("uid_hi3", "");
+        String uidTotText = sharedPreferences.getString("uid_tot", "");
         uid_gi.setText(uidGiText);
         uid_hsr.setText(uidHsrText);
         uid_hi3.setText(uidHi3Text);
+        uid_tot.setText(uidTotText);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("uid_gi", uid_gi.getText().toString());
@@ -59,7 +65,6 @@ public class UIDGenshin extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // No implementation needed
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Update the value in SharedPreferences
@@ -67,20 +72,17 @@ public class UIDGenshin extends AppCompatActivity {
                 editor.putString("uid_gi", charSequence.toString());
                 editor.apply();
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
                 // No implementation needed
             }
         });
 
-        // Add TextWatcher to uid_hsr EditText
         uid_hsr.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // No implementation needed
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Update the value in SharedPreferences
@@ -88,20 +90,17 @@ public class UIDGenshin extends AppCompatActivity {
                 editor.putString("uid_hsr", charSequence.toString());
                 editor.apply();
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
                 // No implementation needed
             }
         });
 
-        // Add TextWatcher to uid_hi3 EditText
         uid_hi3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // No implementation needed
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Update the value in SharedPreferences
@@ -109,7 +108,24 @@ public class UIDGenshin extends AppCompatActivity {
                 editor.putString("uid_hi3", charSequence.toString());
                 editor.apply();
             }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // No implementation needed
+            }
+        });
 
+        uid_tot.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // No implementation needed
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Update the value in SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("uid_tot", charSequence.toString());
+                editor.apply();
+            }
             @Override
             public void afterTextChanged(Editable editable) {
                 // No implementation needed
@@ -203,6 +219,35 @@ public class UIDGenshin extends AppCompatActivity {
             }
         });
 
+        copy_tot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Get the text from uid_tot EditText
+                String uidTotText = uid_tot.getText().toString();
+
+                // Check if the EditText is empty
+                if (uidTotText.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "No UID to copy", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Copy the text to the clipboard
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Copied UID", uidTotText);
+                clipboard.setPrimaryClip(clip);
+
+                // Display a Toast message
+                Toast.makeText(getApplicationContext(), "UID copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+        clear_tot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Clear the text of uid_gi EditText
+                uid_tot.setText("");
+            }
+        });
+
         returnToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,7 +258,7 @@ public class UIDGenshin extends AppCompatActivity {
                     try {
                         // Create an Intent for the previous activity using its class name
                         Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                        Intent intent = new Intent(UIDGenshin.this, previousActivityClass);
+                        Intent intent = new Intent(UID.this, previousActivityClass);
                         startActivity(intent);
                         finish();
                     } catch (ClassNotFoundException e) {
@@ -250,7 +295,7 @@ public class UIDGenshin extends AppCompatActivity {
             try {
                 // Create an Intent for the previous activity using its class name
                 Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                Intent intent = new Intent(UIDGenshin.this, previousActivityClass);
+                Intent intent = new Intent(UID.this, previousActivityClass);
                 startActivity(intent);
                 finish();
             } catch (ClassNotFoundException e) {
