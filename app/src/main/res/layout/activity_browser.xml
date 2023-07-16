@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nhcolor"
+    tools:context=".Browser">
+
+    <RelativeLayout
+        android:id="@+id/input_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_corner"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/power_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_power_settings_new2_24"
+            tools:ignore="HardcodedText"
+            android:importantForAccessibility="no" />
+
+        <EditText
+            android:id="@+id/url_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="10dp"
+            android:layout_toStartOf="@id/clear_icon"
+            android:layout_toEndOf="@id/power_off"
+            android:background="@null"
+            android:hint="@string/search_or_type_url"
+            android:imeOptions="actionGo"
+            android:inputType="textUri"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/clear_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_cancel2_24"
+            android:importantForAccessibility="no" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/nhcolor2"
+        android:layout_below="@id/input_fields"
+        android:id="@+id/divider_1" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/progress_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:progressBackgroundTint="@color/nhcolor"
+        android:progressTint="@color/white"
+        android:layout_below="@id/input_fields"
+        android:visibility="invisible" />
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider_1"
+        android:layout_above="@id/divider_2"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/nhcolor2"
+        android:id="@+id/divider_2"
+        android:layout_above="@id/bottom_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_layout"
+        android:orientation="horizontal"
+        android:background="@color/nhcolor"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_arrow_back2_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_back"
+            android:importantForAccessibility="no" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_arrow_forward2_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_forward"
+            android:importantForAccessibility="no" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_refresh2_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_refresh"
+            android:importantForAccessibility="no" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_share2_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/web_share"
+            android:importantForAccessibility="no" />
+
+    </LinearLayout>
+
+</RelativeLayout>
