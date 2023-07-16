@@ -52,15 +52,16 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="5dp"
+            android:layout_toStartOf="@id/clear_icon"
             android:background="@null"
             android:hint="@string/entercode"
-            android:textColor="@color/white"
             android:imeOptions="actionGo"
+            android:importantForAutofill="no"
             android:inputType="number"
             android:singleLine="true"
-            android:layout_toStartOf="@id/clear_icon"
-            android:textSize="18sp"
-            android:importantForAutofill="no" />
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            tools:ignore="TextContrastCheck,TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
         <ImageView
             android:id="@+id/clear_icon"
@@ -68,8 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:importantForAccessibility="no"
             android:src="@drawable/baseline_cancel2_24"
-            android:importantForAccessibility="no" />
+            tools:ignore="ImageContrastCheck" />
 
     </RelativeLayout>
 
@@ -101,7 +103,7 @@
             android:background="@null"
             android:text="@string/proceed"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="21sp"
             android:textStyle="bold" />
 
     </RelativeLayout>
