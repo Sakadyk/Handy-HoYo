@@ -33,14 +33,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.Methods.MethodUtils;
+
 public class Browser extends AppCompatActivity {
     EditText urlInput;
     ImageView clearUrl;
     WebView webView;
     ProgressBar progressBar;
-    ImageView webBack,webForward,webRefresh,webShare,back;
-    private int backButtonClickCount = 0;
-    private long backButtonLastClickTime = 0;
+    ImageView webBack,webForward,webRefresh,webShare, returnToHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class Browser extends AppCompatActivity {
         clearUrl = findViewById(R.id.clear_icon);
         progressBar = findViewById(R.id.progress_bar);
         webView = findViewById(R.id.web_view);
-        back = findViewById(R.id.power_off);
+        returnToHome = findViewById(R.id.power_off);
 
         webBack = findViewById(R.id.web_back);
         webForward = findViewById(R.id.web_forward);
@@ -70,8 +70,7 @@ public class Browser extends AppCompatActivity {
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setUseWideViewPort(true);
 
-        webView.setWebViewClient(new MyWebViewClient());
-
+        webView.setWebViewClient(new MethodUtils.MyWebViewClientSecret(webView, progressBar, urlInput));
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -80,118 +79,52 @@ public class Browser extends AppCompatActivity {
             }
         });
 
-        webView.setDownloadListener((url, userAgent, contentDisposition, mimeType, contentLength) -> {
-            // Handle the download request here
-            Uri downloadUri = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW, downloadUri);
-            startActivity(intent);
-        });
-
-        webView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                WebView.HitTestResult result = webView.getHitTestResult();
-                if (result.getType() == WebView.HitTestResult.IMAGE_TYPE ||
-                        result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE || result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
-                    // Handle long press on an image or a link
-                    if (result.getType() == WebView.HitTestResult.IMAGE_TYPE || result.getType() == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-                        // Image long press
-                        String imageUrl = result.getExtra();
-                        Uri imageUri = Uri.parse(imageUrl);
-                        // Show a confirmation dialog or perform image-related actions
-                        showConfirmationDialog(imageUri);
-                    } else if (result.getType() == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
-                        // Link long press
-                        String linkUrl = result.getExtra();
-                        Uri linkUri = Uri.parse(linkUrl);
-                        // Show a confirmation dialog or perform link-related actions
-                        showConfirmationDialog(linkUri);
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
+        MethodUtils.setDownload(webView);
+        MethodUtils.setLongClickListenerSecret(this, webView);
 
         // Retrieve the URL from the intent
         String url = getIntent().getStringExtra("url");
         // Load the URL into the WebView
-        webView.loadUrl(url);
+        MethodUtils.loadMyUrl(webView, url);
 
+        //Web Buttons
         urlInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i == EditorInfo.IME_ACTION_GO || i == EditorInfo.IME_ACTION_DONE){
                     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(urlInput.getWindowToken(),0);
-                    loadMyUrl(urlInput.getText().toString());
+                    MethodUtils.loadMyUrl(webView, urlInput.getText().toString());
                     return true;
                 }
                 return false;
             }
         });
-
         clearUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 urlInput.setText("");
             }
         });
-
+        MethodUtils.BrowserBackForward browserBackForward = new MethodUtils.BrowserBackForward(webView, url);
         webBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (webView.canGoBack()) {
-                    webView.goBack();
-                } else {
-                    long currentTime = System.currentTimeMillis();
-                    long elapsedTime = currentTime - backButtonLastClickTime;
-                    if (elapsedTime < 1000) { // Check if the button is pressed within 1 second
-                        backButtonClickCount++;
-                    } else {
-                        backButtonClickCount = 1;
-                    }
-                    backButtonLastClickTime = currentTime;
-                    if (backButtonClickCount >= 3) { // Check if the button is pressed 3 or more times consecutively
-                        Toast.makeText(getApplicationContext(), "CAN NO LONGER GO BACK", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Can no longer go back", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                browserBackForward.handleBackButtonSecret();
             }
         });
-
         webForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (webView.canGoForward()) {
-                    webView.goForward();
-                } else {
-                    long currentTime = System.currentTimeMillis();
-                    long elapsedTime = currentTime - backButtonLastClickTime;
-                    if (elapsedTime < 1000) { // Check if the button is pressed within 1 second
-                        backButtonClickCount++;
-                    } else {
-                        backButtonClickCount = 1;
-                    }
-                    backButtonLastClickTime = currentTime;
-                    if (backButtonClickCount >= 3) { // Check if the button is pressed 3 or more times consecutively
-                        Toast.makeText(getApplicationContext(), "CAN NO LONGER GO FORWARD", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Can no longer go forward", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                browserBackForward.handleForwardButton();
             }
         });
-
         webRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 webView.reload();
             }
         });
-
         webShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,8 +134,7 @@ public class Browser extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent, "Share URL"));
             }
         });
-
-        back.setOnClickListener(new View.OnClickListener() {
+        returnToHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Get the class name of the previous activity
@@ -224,15 +156,6 @@ public class Browser extends AppCompatActivity {
         });
     }
 
-    void loadMyUrl(String url){
-        boolean matchUrl = Patterns.WEB_URL.matcher(url).matches();
-        if(matchUrl){
-            webView.loadUrl(url);
-        }else{
-            webView.loadUrl("google.com/search?q="+url);
-        }
-    }
-
     @Override
     public void onBackPressed() {
         if(webView.canGoBack()){
@@ -240,15 +163,12 @@ public class Browser extends AppCompatActivity {
         }else{
             // Get the class name of the previous activity
             String previousActivityClassName = getIntent().getStringExtra("previousActivity");
-
             if (previousActivityClassName != null) {
                 try {
                     // Create an Intent for the previous activity using its class name
-                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                    Intent intent = new Intent(Browser.this, previousActivityClass);
-                    startActivity(intent);
                     webView.clearHistory();
-                    finish();
+                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                    MethodUtils.startActivityWithAnimation(Browser.this, previousActivityClass);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -273,73 +193,5 @@ public class Browser extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
-    }
-
-    class MyWebViewClient extends WebViewClient{
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            return false;
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            super.onPageStarted(view, url, favicon);
-            urlInput.setText(webView.getUrl());
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
-            progressBar.setVisibility(View.INVISIBLE);
-        }
-
-        @Override
-        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-            super.onReceivedError(view, request, error);
-            // Handle the error, e.g., display an error message or try loading an alternative URL.
-        }
-
-    }
-
-    private void showConfirmationDialog(final Uri imageUri) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        final AlertDialog dialog = builder.create();
-
-        dialog.setTitle("Confirmation");
-        dialog.setMessage("Are you sure you want to open this?");
-
-        SpannableString positiveText = new SpannableString("Open");
-        positiveText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, positiveText.length(), 0);
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // Open the image in the default phone web browser
-                Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
-                startActivity(intent);
-            }
-        });
-
-        SpannableString negativeText = new SpannableString("Cancel");
-        negativeText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, negativeText.length(), 0);
-        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                // User cancelled, do nothing
-            }
-        });
-
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                // Get the dialog's window
-                Window window = dialog.getWindow();
-                if (window != null) {
-                    // Set the background drawable with rounded corners
-                    window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
-                }
-            }
-        });
-        dialog.show();
     }
 }

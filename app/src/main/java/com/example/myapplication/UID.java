@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.myapplication.Methods.MethodUtils;
+
 public class UID extends AppCompatActivity {
     EditText uid_gi, uid_hsr, uid_hi3, uid_tot;
     ImageView copy_gi, copy_hsr, copy_hi3, copy_tot, clear_gi, clear_hsr, clear_hi3, clear_tot;
@@ -269,6 +271,23 @@ public class UID extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        // Get the class name of the previous activity
+        String previousActivityClassName = getIntent().getStringExtra("previousActivity");
+        if (previousActivityClassName != null) {
+            try {
+                // Create an Intent for the previous activity using its class name
+                Class<?> previousActivityClass = Class.forName(previousActivityClassName);
+                MethodUtils.startActivityWithAnimation(UID.this, previousActivityClass);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            super.onBackPressed(); // If no previous activity specified, perform default back button behavior
+        }
+    }
+
     public boolean dispatchTouchEvent(MotionEvent event) {
         View view = getCurrentFocus();
         if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -284,25 +303,5 @@ public class UID extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
-    }
-
-    @Override
-    public void onBackPressed() {
-        // Get the class name of the previous activity
-        String previousActivityClassName = getIntent().getStringExtra("previousActivity");
-
-        if (previousActivityClassName != null) {
-            try {
-                // Create an Intent for the previous activity using its class name
-                Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                Intent intent = new Intent(UID.this, previousActivityClass);
-                startActivity(intent);
-                finish();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        } else {
-            super.onBackPressed(); // If no previous activity specified, perform default back button behavior
-        }
     }
 }

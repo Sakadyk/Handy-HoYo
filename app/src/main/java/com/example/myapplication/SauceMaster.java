@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.myapplication.Methods.MethodUtils;
+
 public class SauceMaster extends AppCompatActivity {
     EditText code;
     RelativeLayout button, inputFields;
@@ -84,38 +86,6 @@ public class SauceMaster extends AppCompatActivity {
         });
     }
 
-    private void performButtonClick() {
-        String codeInput = code.getText().toString();
-        String url;
-        if (TextUtils.isEmpty(codeInput)) {
-            url = "https://nhentai.net/";
-        } else {
-            url = "https://nhentai.net/g/" + codeInput;
-        }
-        Intent intent = new Intent(code.getContext(), Browser.class);
-        intent.putExtra("url", url);
-        intent.putExtra("previousActivity", Genshin.class.getName());
-        code.getContext().startActivity(intent);
-        releaseMediaPlayer();
-    }
-
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        View view = getCurrentFocus();
-        if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
-            int[] coordinates = new int[2];
-            view.getLocationOnScreen(coordinates);
-            float x = event.getRawX() + view.getLeft() - coordinates[0];
-            float y = event.getRawY() + view.getTop() - coordinates[1];
-
-            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) {
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                view.clearFocus();
-            }
-        }
-        return super.dispatchTouchEvent(event);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -146,6 +116,21 @@ public class SauceMaster extends AppCompatActivity {
         }
     }
 
+    private void performButtonClick() {
+        String codeInput = code.getText().toString();
+        String url;
+        if (TextUtils.isEmpty(codeInput)) {
+            url = "https://nhentai.net/";
+        } else {
+            url = "https://nhentai.net/g/" + codeInput;
+        }
+        Intent intent = new Intent(code.getContext(), Browser.class);
+        intent.putExtra("url", url);
+        intent.putExtra("previousActivity", Genshin.class.getName());
+        code.getContext().startActivity(intent);
+        releaseMediaPlayer();
+    }
+
     public void onBackPressed() {
         // Get the class name of the previous activity
         String previousActivityClassName = getIntent().getStringExtra("previousActivity");
@@ -154,15 +139,29 @@ public class SauceMaster extends AppCompatActivity {
             try {
                 // Create an Intent for the previous activity using its class name
                 Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                Intent intent = new Intent(SauceMaster.this, previousActivityClass);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-                finish();
+                MethodUtils.startActivityWithAnimation(SauceMaster.this, previousActivityClass);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         } else {
             super.onBackPressed(); // If no previous activity specified, perform default back button behavior
         }
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        View view = getCurrentFocus();
+        if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
+            int[] coordinates = new int[2];
+            view.getLocationOnScreen(coordinates);
+            float x = event.getRawX() + view.getLeft() - coordinates[0];
+            float y = event.getRawY() + view.getTop() - coordinates[1];
+
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                view.clearFocus();
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 }
