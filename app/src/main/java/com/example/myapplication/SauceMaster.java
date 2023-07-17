@@ -6,9 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -110,12 +108,12 @@ public class SauceMaster extends AppCompatActivity {
         intent.putExtra("previousActivity", Genshin.class.getName());
         code.getContext().startActivity(intent);
         releaseMediaPlayer();
+        finish();
     }
 
+    @Override
     public void onBackPressed() {
-        // Get the class name of the previous activity
         String previousActivityClassName = getIntent().getStringExtra("previousActivity");
-
         if (previousActivityClassName != null) {
             try {
                 // Create an Intent for the previous activity using its class name
@@ -129,20 +127,9 @@ public class SauceMaster extends AppCompatActivity {
         }
     }
 
+    @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        View view = getCurrentFocus();
-        if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
-            int[] coordinates = new int[2];
-            view.getLocationOnScreen(coordinates);
-            float x = event.getRawX() + view.getLeft() - coordinates[0];
-            float y = event.getRawY() + view.getTop() - coordinates[1];
-
-            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) {
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                view.clearFocus();
-            }
-        }
-        return super.dispatchTouchEvent(event);
+        boolean result = MethodUtils.dispatchTouchEvent(this, event);
+        return result || super.dispatchTouchEvent(event);
     }
 }

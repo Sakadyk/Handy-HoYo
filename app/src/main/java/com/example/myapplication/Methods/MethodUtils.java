@@ -16,6 +16,7 @@ import android.util.Patterns;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -183,6 +184,7 @@ public class MethodUtils {
                             Intent intent = new Intent(webView.getContext(), SauceMaster.class);
                             intent.putExtra("previousActivity", webView.getContext().getClass().getName());
                             webView.getContext().startActivity(intent);
+                            ((Activity) webView.getContext()).finish();
                         };
                         handler.postDelayed(runnable, 2000); // Set long click duration (2 seconds)
                         return true;
@@ -265,7 +267,7 @@ public class MethodUtils {
         dialog.setMessage("Are you sure you want to open this?");
 
         SpannableString positiveText = new SpannableString("Open");
-        positiveText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, positiveText.length(), 0);
+        positiveText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#ef3862")), null), 0, positiveText.length(), 0);
         dialog.setButton(AlertDialog.BUTTON_POSITIVE, positiveText, (dialogInterface, i) -> {
             // Open the image in the default phone web browser
             Intent intent = new Intent(Intent.ACTION_VIEW, imageUri);
@@ -273,7 +275,7 @@ public class MethodUtils {
         });
 
         SpannableString negativeText = new SpannableString("Cancel");
-        negativeText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#d8ae79")), null), 0, negativeText.length(), 0);
+        negativeText.setSpan(new TextAppearanceSpan(null, 0, 0, ColorStateList.valueOf(Color.parseColor("#ef3862")), null), 0, negativeText.length(), 0);
         dialog.setButton(AlertDialog.BUTTON_NEGATIVE, negativeText, (dialogInterface, i) -> {
             // User cancelled, do nothing
         });
@@ -283,7 +285,7 @@ public class MethodUtils {
             Window window = dialog.getWindow();
             if (window != null) {
                 // Set the background drawable with rounded corners
-                window.setBackgroundDrawableResource(R.drawable.rounded_corner4);
+                window.setBackgroundDrawableResource(R.drawable.rounded_corner5);
             }
         });
         dialog.show();
@@ -354,5 +356,22 @@ public class MethodUtils {
             super.onReceivedError(view, request, error);
             // Handle the error, e.g., display an error message or try loading an alternative URL.
         }
+    }
+
+    public static boolean dispatchTouchEvent(Activity activity, MotionEvent event) {
+        View view = activity.getCurrentFocus();
+        if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
+            int[] coordinates = new int[2];
+            view.getLocationOnScreen(coordinates);
+            float x = event.getRawX() + view.getLeft() - coordinates[0];
+            float y = event.getRawY() + view.getTop() - coordinates[1];
+
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) {
+                InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                view.clearFocus();
+            }
+        }
+        return false;
     }
 }

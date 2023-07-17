@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
@@ -94,23 +93,7 @@ public class Browser extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
             startActivity(Intent.createChooser(intent, "Share URL"));
         });
-        returnToHome.setOnClickListener(view -> {
-            // Get the class name of the previous activity
-            String previousActivityClassName = getIntent().getStringExtra("previousActivity");
-
-            if (previousActivityClassName != null) {
-                try {
-                    // Create an Intent for the previous activity using its class name
-                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                    Intent intent = new Intent(Browser.this, previousActivityClass);
-                    startActivity(intent);
-                    webView.clearHistory();
-                    finish();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        returnToHome.setOnClickListener(view -> MethodUtils.startActivityWithAnimation(Browser.this, Genshin.class));
     }
 
     @Override
@@ -118,37 +101,13 @@ public class Browser extends AppCompatActivity {
         if(webView.canGoBack()){
             webView.goBack();
         }else{
-            // Get the class name of the previous activity
-            String previousActivityClassName = getIntent().getStringExtra("previousActivity");
-            if (previousActivityClassName != null) {
-                try {
-                    // Create an Intent for the previous activity using its class name
-                    webView.clearHistory();
-                    Class<?> previousActivityClass = Class.forName(previousActivityClassName);
-                    MethodUtils.startActivityWithAnimation(Browser.this, previousActivityClass);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                super.onBackPressed(); // If no previous activity specified, perform default back button behavior
-            }
+            MethodUtils.startActivityWithAnimation(Browser.this, Genshin.class);
         }
     }
 
+    @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        View view = getCurrentFocus();
-        if (view != null && event.getAction() == MotionEvent.ACTION_DOWN) {
-            int[] coordinates = new int[2];
-            view.getLocationOnScreen(coordinates);
-            float x = event.getRawX() + view.getLeft() - coordinates[0];
-            float y = event.getRawY() + view.getTop() - coordinates[1];
-
-            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()) {
-                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                view.clearFocus();
-            }
-        }
-        return super.dispatchTouchEvent(event);
+        boolean result = MethodUtils.dispatchTouchEvent(this, event);
+        return result || super.dispatchTouchEvent(event);
     }
 }
