@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -24,15 +25,24 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        // Check Android version
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Android 12 or above, start Genshin activity
+            Intent intent = new Intent(this, Genshin.class);
+            startActivity(intent);
+            finish();
+        } else {
+            // Android 11 or lower, continue with the normal flow
+            setContentView(R.layout.activity_splash_screen);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        progressBar = findViewById(R.id.progressbar);
-        textView = findViewById(R.id.progresstext);
-        gifImageView = findViewById(R.id.gif);
+            progressBar = findViewById(R.id.progressbar);
+            textView = findViewById(R.id.progresstext);
+            gifImageView = findViewById(R.id.gif);
 
-        Thread thread = new Thread(this::startProgress);
-        thread.start();
+            Thread thread = new Thread(this::startProgress);
+            thread.start();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -45,7 +55,6 @@ public class SplashScreen extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             handler.post(() -> textView.setText(value + "%"));
         }
         run();

@@ -7,6 +7,7 @@ import android.view.WindowManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -75,6 +76,10 @@ public class TearsOfThemis extends AppCompatActivity {
 
         MethodUtils.setDownload(webView);
         MethodUtils.setLongClickListener(this, webView);
+
+        HorizontalScrollView horizontalScrollView = findViewById(R.id.app_scroll_tot);
+        // Adjust the scroll position to reverse the scrolling direction
+        horizontalScrollView.post(() -> horizontalScrollView.fullScroll(HorizontalScrollView.FOCUS_RIGHT));
 
         //Buttons
         MethodUtils.BrowserBackForward browserBackForward = new MethodUtils.BrowserBackForward(webView, defaultUrl);
