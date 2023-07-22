@@ -29,6 +29,7 @@ public class SauceMaster extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sauce_master);
         getWindow().setStatusBarColor(ContextCompat.getColor(SauceMaster.this, R.color.nhcolor));
+        getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.nhcolor));
 
         button = findViewById(R.id.button);
         code = findViewById(R.id.code_input);

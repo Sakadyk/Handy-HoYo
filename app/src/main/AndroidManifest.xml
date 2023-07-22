@@ -57,6 +57,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:exported="false"
             android:screenOrientation="portrait"
+            android:theme="@style/SecretNavBar"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".UID"

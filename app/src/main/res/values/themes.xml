@@ -3,7 +3,8 @@
     <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <!-- <item name="android:windowIsTranslucent">true</item>  Make Android 12+ splash screen transparent -->
+        <!-- Apply the navigation bar color using a theme overlay -->
+        <item name="android:navigationBarColor">#fffbfe</item>
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />

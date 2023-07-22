@@ -374,4 +374,12 @@ public class MethodUtils {
         }
         return false;
     }
+
+    public static void transparentNavBar(Activity activity){
+        Window window = activity.getWindow();
+        View decorView = window.getDecorView();
+        int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+        decorView.setSystemUiVisibility(flags);
+        window.setStatusBarColor(Color.TRANSPARENT);
+    }
 }

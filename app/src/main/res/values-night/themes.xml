@@ -4,5 +4,6 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <!-- <item name="android:windowIsTranslucent">true</item> -->
+        <item name="android:navigationBarColor">#1c1b1f</item>
     </style>
 </resources>
