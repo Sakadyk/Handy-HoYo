@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -17,7 +19,7 @@ import androidx.cardview.widget.CardView;
 import com.example.myapplication.Methods.MethodUtils;
 
 public class HonkaiStarRail extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, kqm, enka;
+    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, yatta, kqm, enka;
     CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
@@ -51,6 +53,7 @@ public class HonkaiStarRail extends AppCompatActivity {
         battle = findViewById(R.id.battle_hsr);
         map = findViewById(R.id.map_hsr);
         wiki = findViewById(R.id.wiki_hsr);
+        yatta = findViewById(R.id.yatta_hsr);
         kqm = findViewById(R.id.kqm_hsr);
         enka = findViewById(R.id.enka_hsr);
 
@@ -99,8 +102,23 @@ public class HonkaiStarRail extends AppCompatActivity {
         battle.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/app/community-game-records-sea/m.html#/hsr"));
         map.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/sr/app/interactive-map/index.html"));
         wiki.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://honkai-star-rail.fandom.com/"));
+        yatta.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://hsr.yatta.top/en"));
         kqm.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://hsr.keqingmains.com/"));
-        enka.setOnClickListener(view -> Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show());
+        enka.setOnClickListener(view -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+            String uidGiText = sharedPreferences.getString("uid_hsr", "");
+
+            String url;
+            if (!uidGiText.isEmpty()) { url = "https://enka.network/hsr/" + uidGiText;
+            } else {
+                url = "https://enka.network";
+            }
+            MethodUtils.loadMyUrl(webView, url);
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("uid_hsr", uidGiText);
+            editor.apply();
+        });
 
         //App Buttons
         appGi.setOnClickListener(v -> MethodUtils.startActivityWithoutAnimation(HonkaiStarRail.this, Genshin.class));

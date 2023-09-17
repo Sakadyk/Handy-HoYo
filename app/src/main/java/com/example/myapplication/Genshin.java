@@ -19,7 +19,7 @@ import androidx.cardview.widget.CardView;
 import com.example.myapplication.Methods.MethodUtils;
 
 public class Genshin extends AppCompatActivity {
-    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, calc, kqm, enka;
+    LinearLayout checkIn, redeemCode, userId, battle, map, wiki, calc, amber, kqm, enka;
     CardView appGi, appHsr, appHi3, appTot, appZzz, appHoyo;
     WebView webView;
     ProgressBar progressBar;
@@ -54,6 +54,7 @@ public class Genshin extends AppCompatActivity {
         map = findViewById(R.id.map_gi);
         wiki = findViewById(R.id.wiki_gi);
         calc = findViewById(R.id.calc_gi);
+        amber = findViewById(R.id.amber_gi);
         kqm = findViewById(R.id.keqing_mains);
         enka = findViewById(R.id.enka_gi);
 
@@ -103,6 +104,7 @@ public class Genshin extends AppCompatActivity {
         map.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/app/interactive-map/index.html"));
         wiki.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://genshin-impact.fandom.com/"));
         calc.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://act.hoyolab.com/ys/event/calculator-sea/index.html"));
+        amber.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://ambr.top/en"));
         kqm.setOnClickListener(view -> MethodUtils.loadMyUrl(webView, "https://keqingmains.com/"));
         enka.setOnClickListener(view -> {
             SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);

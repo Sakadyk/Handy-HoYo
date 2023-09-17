@@ -357,10 +357,35 @@
                 <LinearLayout
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/keqing_mains"
+                    android:id="@+id/amber_gi"
                     android:gravity="center_horizontal"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/calc_gi"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/amber"
+                        android:importantForAccessibility="no" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_amber"
+                        android:textSize="11sp"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/keqing_mains"
+                    android:gravity="center_horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_toEndOf="@id/amber_gi"
                     android:orientation="vertical"
                     tools:ignore="UseCompoundDrawables">
 
