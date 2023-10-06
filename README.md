@@ -12,8 +12,9 @@ Tools and features for HoYoverse's games (i.e. Genshin Impact, Honkai: Star Rail
 5. In-game map
 6. Wiki
 7. Enhancement Calculator
-8. KQM
-9. Enka.Network
+8. Project Amber & Project Yatta
+9. KQM
+10. Enka.Network
 
 *Some features are only available on certain games.
 
