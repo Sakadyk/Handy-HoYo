@@ -37,4 +37,6 @@
     <string name="return_home">Return</string>
     <string name="zenless_zone_zero">Zenless Zone Zero</string>
     <string name="sign_up">Sign-Up</string>
+    <string name="project_amber">Project Amber</string>
+    <string name="project_yatta">Project Yatta</string>
 </resources>
